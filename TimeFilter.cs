@@ -50,14 +50,14 @@ namespace sharpAdvising
                 PotentialSchedule.Add(new Course(numID, dID));
                 Console.WriteLine("you done homie");
             }
-            matches = new List<Zaps>();
+            matches = new List<Match>();
 
             foreach (Course element in PotentialSchedule)
             {
                 addMatches(element,0);
                 //PotentialSchedule.RemoveAt(0);     
             }
-
+            Console.WriteLine("here is where I stopped");
         }
 
         public TimeFilter(int numberOfClassesRequested, List<string> classesAlreadyCompleted)//This will establish a schedule for a student that has already recieved some college creditis
@@ -115,12 +115,12 @@ namespace sharpAdvising
         }
         public List<Quarter> preReqsQualifiedfFor;
         public List<Course> potentialSchedule;
-        public List<Zaps> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
+        public List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
 
         public void addMatches(Course recievedCourse, int termNum)
         {
             int count = (matches.Count());
-            matches.Add(new Zaps());
+            matches.Add(new Match());
             matches[count].courseName = recievedCourse.courseID;
             if (count == 0)
             {
@@ -176,7 +176,7 @@ namespace sharpAdvising
 
         public bool hasCourseAlreadyBeenRecomended(Course cour)
         {
-            foreach (Zaps element in matches)
+            foreach (Match element in matches)
             {
                 if (cour.courseID == element.courseName)
                 {

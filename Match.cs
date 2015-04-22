@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace sharpAdvising
 {
-    public class Zaps
+    public class Match
     {
-        public Zaps()
+        public Match()
         {
             sectionOptions = new List<Section>();
         }

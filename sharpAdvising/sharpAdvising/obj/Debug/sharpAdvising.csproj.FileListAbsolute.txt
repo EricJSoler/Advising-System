@@ -1,6 +1,0 @@
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\bin\Debug\sharpAdvising.exe.config
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\bin\Debug\sharpAdvising.exe
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\bin\Debug\sharpAdvising.pdb
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\obj\Debug\sharpAdvising.exe
-C:\Users\Eric\Desktop\sharpAdvising\sharpAdvising\obj\Debug\sharpAdvising.pdb
