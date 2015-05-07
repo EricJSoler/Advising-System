@@ -13,7 +13,7 @@ namespace sharpAdvising
 
         public TimeFilter()//The default construct will simple create a schedule with one class in it
         {
-            preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml"); //Hey i want this to be read only how does AsReadOnly Look?
+            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml"); //Hey i want this to be read only how does AsReadOnly Look?
             List<Course> PotentialSchedule = new List<Course>();
             PotentialSchedule.Add(new Course(preReqsQualifiedfFor[0].courses[0]));
 
@@ -21,19 +21,19 @@ namespace sharpAdvising
 
         public TimeFilter(int numberOfClasses)//This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
         {
-            preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
+            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
             List<Course> PotentialSchedule = new List<Course>();
 
-            int availableCourseCounter = 0;
-            foreach (string element in preReqsQualifiedfFor[0].courses)
-            {
-                availableCourseCounter++;
-            }
+            //int availableCourseCounter = 0;
+            //foreach (string element in preReqsQualifiedfFor[0].courses)
+            //{
+            //    availableCourseCounter++;
+            //}
 
-            if (availableCourseCounter < numberOfClasses)
-            {
-                numberOfClasses = availableCourseCounter;
-            }
+            //if (availableCourseCounter < numberOfClasses)
+            //{
+            //    numberOfClasses = availableCourseCounter;
+            //}
 
 
 
@@ -62,7 +62,7 @@ namespace sharpAdvising
 
         public TimeFilter(int numberOfClassesRequested, List<string> classesAlreadyCompleted)//This will establish a schedule for a student that has already recieved some college creditis
         {
-            preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
+            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
             potentialSchedule = new List<Course>();
 
             int j = 0;
@@ -81,14 +81,14 @@ namespace sharpAdvising
 
         }
 
-        public List<Quarter> LoadPreReqsFromFile(string fileName)//Load the "XML1" a list of pre requisites from preReq Module
-        {
-            using (var stream = new FileStream(fileName, FileMode.Open))
-            {
-                var XML = new XmlSerializer(typeof(List<Quarter>));
-                return (List<Quarter>)XML.Deserialize(stream);
-            }
-        }
+        //public List<Quarter> LoadPreReqsFromFile(string fileName)//Load the "XML1" a list of pre requisites from preReq Module
+        //{
+        //    using (var stream = new FileStream(fileName, FileMode.Open))
+        //    {
+        //        var XML = new XmlSerializer(typeof(List<Quarter>));
+        //        return (List<Quarter>)XML.Deserialize(stream);
+        //    }
+        //}
         public int coursesInQuarterNode(int quarterNode)
         {
             return preReqsQualifiedfFor[quarterNode].courses.Count;
