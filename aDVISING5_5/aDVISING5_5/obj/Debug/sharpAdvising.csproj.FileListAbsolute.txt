@@ -1,0 +1,12 @@
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe.config
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.exe
+C:\Users\ejsoler\Desktop\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
+F:\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe.config
+F:\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.exe
+F:\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
+F:\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
+F:\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
+F:\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache

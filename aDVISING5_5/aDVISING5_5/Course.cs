@@ -47,16 +47,7 @@ namespace sharpAdvising
 
         public void readDataForCourseName(string dID, string nID)
         {
-            SqlConnection myConnection = new SqlConnection("User ID = Algo;" + "Password = Alg0rithm; server = algo.database.windows.net;" + "database =Advising_20150405;"
-                + "Connection Timeout = 30;");
-            try
-            {
-                myConnection.Open();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
@@ -64,7 +55,7 @@ namespace sharpAdvising
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@DepartmentID", dID));
             cmd.Parameters.Add(new SqlParameter("@NumberID", nID));
-            cmd.Connection = myConnection;
+            cmd.Connection = SQLHANDLER.myConnection;
 
             reader = cmd.ExecuteReader();
 
@@ -104,7 +95,7 @@ namespace sharpAdvising
             }
 
             reader.Close();
-            myConnection.Close();
+           
         }
     }
 }
