@@ -51,6 +51,7 @@
     <Compile Include="Section.cs" />
     <Compile Include="SQLHANDLER.cs" />
     <Compile Include="CourseStackNode.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="Term.cs" />
     <Compile Include="TimeFilter.cs" />
     <Compile Include="Times.cs" />

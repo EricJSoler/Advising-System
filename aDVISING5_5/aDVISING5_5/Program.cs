@@ -20,9 +20,9 @@ namespace sharpAdvising
             String recievedDegree;///TODO:For our final product recievedDegree and quarterOfEnrollment will be coming in most likely from a windows form application for now we will just input them into the console
             String quarterOfEnrollment;
 
-            recievedDegree = Console.ReadLine();
-            quarterOfEnrollment = Console.ReadLine();
-            //PreReq wow = new PreReq();
+           // recievedDegree = Console.ReadLine();
+            //quarterOfEnrollment = Console.ReadLine();
+            PreReq wow = new PreReq();
             TimeFilter test = new TimeFilter(3);
           
         }
@@ -30,3 +30,4 @@ namespace sharpAdvising
         
     }
 }
+

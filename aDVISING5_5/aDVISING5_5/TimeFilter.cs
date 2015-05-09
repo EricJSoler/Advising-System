@@ -35,6 +35,7 @@ namespace sharpAdvising
                 Console.WriteLine("input a num id");
                 numID = Console.ReadLine();
                 PotentialSchedule.Add((new Course(numID, dID)));
+                PotentialSchedule[i].readDataForCourseName();//TODO: Check this to make sure it still works right this was re-arranged to allow for Course Class to be used better
                 Console.WriteLine("you done homie");
             }
             matches = new List<Match>();
