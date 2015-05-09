@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Xml.Serialization;//added 2/25
+using System.Xml.Serialization;
 using System.IO;
 
 namespace sharpAdvising
@@ -17,48 +17,49 @@ namespace sharpAdvising
 
         public PreReq()
         {
+            program = "AAS-MCAIMS";
+            subjectRequirements = new List<Subject>();
+            findDepartments();
 
-            string depIDHighestMath;
-            string numIDHighestMath;
-            depIDHighestMath = Console.ReadLine();
-            numIDHighestMath = Console.ReadLine();
-            CourseStack first = new CourseStack(depIDHighestMath,numIDHighestMath, false);
+        }
 
-
-            ////
-            string num;
-            string dep;
-            Console.WriteLine("inpout department ID");
-            dep = Console.ReadLine();
-
-            Console.WriteLine("input number ID");
-            num = Console.ReadLine();
-
-            
+        private void findDepartments()
+        {
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
-            cmd.CommandText = "dbo.read_by_dep_num";
+            cmd.CommandText = "dbo.read_subjects_by_program";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@DepartmentID", dep));
-            cmd.Parameters.Add(new SqlParameter("@NumberID", num));
+            cmd.Parameters.Add(new SqlParameter("@programID",program));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            while(reader.Read())
             {
-                int fieldCount = reader.FieldCount;
-                for(int i = 0; i < fieldCount; i++)
+                string readValue = reader.GetValue(0).ToString();
+                if(!subjectAlreadyAdded(readValue))
                 {
-                    string colName = reader.GetName(i);
-                    string readValue = reader.GetValue(i).ToString();
-                    Console.WriteLine("we here");
+                    subjectRequirements.Add(new Subject(readValue));
                 }
-
             }
 
             reader.Close();
+
+            Console.WriteLine("we here");
         }
+
+        private bool subjectAlreadyAdded(string test)
+        {
+            foreach(Subject element in subjectRequirements)
+            {
+                if (element.department == test)
+                    return true;
+            }
+            return false;
+        }
+
+
+      public static string program;
+      List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
     }
 }

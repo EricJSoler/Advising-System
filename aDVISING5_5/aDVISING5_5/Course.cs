@@ -27,7 +27,6 @@ namespace sharpAdvising
             ownedTerms = new List<Term>();
             numberID = numID;
             departmentID = dID;
-            readDataForCourseName(departmentID, numberID);
         }
 
        
@@ -36,7 +35,7 @@ namespace sharpAdvising
         public List<Term> ownedTerms;
 
 
-        public void readDataForCourseName(string dID, string nID)
+        public void readDataForCourseName()
         {
 
             SqlCommand cmd = new SqlCommand();
@@ -44,8 +43,8 @@ namespace sharpAdvising
 
             cmd.CommandText = "Course.spOfferingRead_ByDepartmentIdAndNumberId";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@DepartmentID", dID));
-            cmd.Parameters.Add(new SqlParameter("@NumberID", nID));
+            cmd.Parameters.Add(new SqlParameter("@DepartmentID", departmentID));
+            cmd.Parameters.Add(new SqlParameter("@NumberID", numberID));
             cmd.Connection = SQLHANDLER.myConnection;
 
             reader = cmd.ExecuteReader();

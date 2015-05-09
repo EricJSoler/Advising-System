@@ -28,7 +28,7 @@ namespace sharpAdvising
                 Console.WriteLine(e.ToString());
             }
             myConnection2 = new SqlConnection("User ID = Algo;" + "Password = Alg0rithm; server = algo.database.windows.net;" + "database =Test_0506;"
-   + "Connection Timeout = 30;");
+   + "Connection Timeout = 30;"+"MultipleActiveResultSets=true;");
             try
             {
                 myConnection2.Open();
