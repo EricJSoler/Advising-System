@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classsharp_advising_1_1_course" kind="class" language="C#" prot="public">
+    <compoundname>sharpAdvising::Course</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_1adb3934beca714ed707986be4b4b38491" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.Course.departmentID</definition>
+        <argsstring></argsstring>
+        <name>departmentID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="34" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_1aac50724a94ab711b409b241b406e48ce" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.Course.numberID</definition>
+        <argsstring></argsstring>
+        <name>numberID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="35" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_1a7bafbae331464f4a53431ccafbbe2b78" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="classsharp_advising_1_1_term" kindref="compound">Term</ref> &gt;</type>
+        <definition>List&lt;Term&gt; sharpAdvising.Course.ownedTerms</definition>
+        <argsstring></argsstring>
+        <name>ownedTerms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="36" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_course_1a7ddc5a5e0d22efa2b74b8ad5de62d4e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.Course.Course</definition>
+        <argsstring>()</argsstring>
+        <name>Course</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="22" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="22" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_course_1a13932bdf08eb9e71b82ddd21abbd3fa4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.Course.Course</definition>
+        <argsstring>(string numID, string dID)</argsstring>
+        <name>Course</name>
+        <param>
+          <type>string</type>
+          <declname>numID</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>dID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="25" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="25" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_course_1a5370d043d8fb0a79d5744d9f6b69dee1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sharpAdvising.Course.readDataForCourseName</definition>
+        <argsstring>(string dID, string nID)</argsstring>
+        <name>readDataForCourseName</name>
+        <param>
+          <type>string</type>
+          <declname>dID</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>nID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="39" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="39" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classsharp_advising_1_1_course" kindref="compound">Course</ref>: Stores and pulls information about individual courses for the forseable future. Usability: Create a course with the constructor accepting a string refering to the numberID of the course to pull information for and a string refering to the department ID of the course to pull information for It owns a list of <ref refid="classsharp_advising_1_1_term" kindref="compound">Term</ref> objects which each term (i.e. Fall, Winter etc...) owns a list of sections that contain specific information about the courses different oferring times. Once this object is created you can navigate through its list of <ref refid="classsharp_advising_1_1_term" kindref="compound">Term</ref> objects &quot;ownedTerms&quot; and through &quot;ownedTerms&quot; list of <ref refid="classsharp_advising_1_1_section" kindref="compound">Section</ref> objects &quot;ownedSections&quot; to compare the times that offered between different courses. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="21" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" bodystart="20" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classsharp_advising_1_1_course_1a7ddc5a5e0d22efa2b74b8ad5de62d4e4" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>Course</name></member>
+      <member refid="classsharp_advising_1_1_course_1a13932bdf08eb9e71b82ddd21abbd3fa4" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>Course</name></member>
+      <member refid="classsharp_advising_1_1_course_1adb3934beca714ed707986be4b4b38491" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>departmentID</name></member>
+      <member refid="classsharp_advising_1_1_course_1aac50724a94ab711b409b241b406e48ce" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>numberID</name></member>
+      <member refid="classsharp_advising_1_1_course_1a7bafbae331464f4a53431ccafbbe2b78" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>ownedTerms</name></member>
+      <member refid="classsharp_advising_1_1_course_1a5370d043d8fb0a79d5744d9f6b69dee1" prot="public" virt="non-virtual"><scope>sharpAdvising::Course</scope><name>readDataForCourseName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
+    <Compile Include="CourseStack.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="PreReq.cs" />
     <Compile Include="Program.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Quarter.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="SQLHANDLER.cs" />
+    <Compile Include="CourseStackNode.cs" />
     <Compile Include="Term.cs" />
     <Compile Include="TimeFilter.cs" />
     <Compile Include="Times.cs" />

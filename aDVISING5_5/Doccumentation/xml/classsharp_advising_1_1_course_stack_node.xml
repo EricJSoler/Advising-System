@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classsharp_advising_1_1_course_stack_node" kind="class" language="C#" prot="public">
+    <compoundname>sharpAdvising::CourseStackNode</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_stack_node_1a9327e837d316a384e89a9c42c104116f" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.CourseStackNode.depID</definition>
+        <argsstring></argsstring>
+        <name>depID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" line="16" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_stack_node_1a04c5422f3e2c3cec10b6d46a1ce1f2d2" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.CourseStackNode.numID</definition>
+        <argsstring></argsstring>
+        <name>numID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" line="17" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_course_stack_node_1ad7bfbfee25ba46428a9edfa1ef643e28" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.CourseStackNode.Marker</definition>
+        <argsstring></argsstring>
+        <name>Marker</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" line="18" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_course_stack_node_1affe3632ea1958e6c139e5def2effa51a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.CourseStackNode.CourseStackNode</definition>
+        <argsstring>()</argsstring>
+        <name>CourseStackNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" line="12" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" bodystart="12" bodyend="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" line="11" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/CourseStackNode.cs" bodystart="10" bodyend="20"/>
+    <listofallmembers>
+      <member refid="classsharp_advising_1_1_course_stack_node_1affe3632ea1958e6c139e5def2effa51a" prot="public" virt="non-virtual"><scope>sharpAdvising::CourseStackNode</scope><name>CourseStackNode</name></member>
+      <member refid="classsharp_advising_1_1_course_stack_node_1a9327e837d316a384e89a9c42c104116f" prot="public" virt="non-virtual"><scope>sharpAdvising::CourseStackNode</scope><name>depID</name></member>
+      <member refid="classsharp_advising_1_1_course_stack_node_1ad7bfbfee25ba46428a9edfa1ef643e28" prot="public" virt="non-virtual"><scope>sharpAdvising::CourseStackNode</scope><name>Marker</name></member>
+      <member refid="classsharp_advising_1_1_course_stack_node_1a04c5422f3e2c3cec10b6d46a1ce1f2d2" prot="public" virt="non-virtual"><scope>sharpAdvising::CourseStackNode</scope><name>numID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

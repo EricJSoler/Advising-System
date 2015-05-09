@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classsharp_advising_1_1_time_filter" kind="class" language="C#" prot="public">
+    <compoundname>sharpAdvising::TimeFilter</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsharp_advising_1_1_time_filter_1a015ecd651fdc5a6f2a694188e4d4e331" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="classsharp_advising_1_1_quarter" kindref="compound">Quarter</ref> &gt;</type>
+        <definition>List&lt;Quarter&gt; sharpAdvising.TimeFilter.preReqsQualifiedfFor</definition>
+        <argsstring></argsstring>
+        <name>preReqsQualifiedfFor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="74" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_time_filter_1a18c8724d06cecaf5c16fc8b10c7a260c" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="classsharp_advising_1_1_course" kindref="compound">Course</ref> &gt;</type>
+        <definition>List&lt;Course&gt; sharpAdvising.TimeFilter.potentialSchedule</definition>
+        <argsstring></argsstring>
+        <name>potentialSchedule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="75" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_time_filter_1a0e355342ec2bb167960d2a933ea5fc8a" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="classsharp_advising_1_1_match" kindref="compound">Match</ref> &gt;</type>
+        <definition>List&lt;Match&gt; sharpAdvising.TimeFilter.matches</definition>
+        <argsstring></argsstring>
+        <name>matches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="76" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1a9d251777f71a58d89250e0aacf8e0464" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.TimeFilter.TimeFilter</definition>
+        <argsstring>()</argsstring>
+        <name>TimeFilter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="19" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1a49467bdeba56786ea8a11e88a9bafcae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.TimeFilter.TimeFilter</definition>
+        <argsstring>(int numberOfClasses)</argsstring>
+        <name>TimeFilter</name>
+        <param>
+          <type>int</type>
+          <declname>numberOfClasses</declname>
+        </param>
+        <briefdescription>
+<para>This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in &quot;quarter 0&quot;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>TODO: this potentialSchedule should come from the Pre-Req filter maybeRename it as coursesQualified for</para><para>TODO: this loop should be performed on the coursesQualifed for the comes from the <ref refid="classsharp_advising_1_1_pre_req" kindref="compound">PreReq</ref> Filter </para>        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="24" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="24" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1a1367c7ee387f287f05dc209b318ad00b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int sharpAdvising.TimeFilter.whichQuarter</definition>
+        <argsstring>()</argsstring>
+        <name>whichQuarter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="54" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="54" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1aa75f6c377942064d87b3406ba1b0216d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sharpAdvising.TimeFilter.addMatches</definition>
+        <argsstring>(Course recievedCourse, int termNum)</argsstring>
+        <name>addMatches</name>
+        <param>
+          <type><ref refid="classsharp_advising_1_1_course" kindref="compound">Course</ref></type>
+          <declname>recievedCourse</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>termNum</declname>
+        </param>
+        <briefdescription>
+<para>This will consist of a List of course objects that will contain what sections are already filled to allow for testing. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE </para>        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="78" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="78" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1ab1f917b0cc4a9c433c51c72b3fd951d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sharpAdvising.TimeFilter.hasCourseAlreadyBeenRecomended</definition>
+        <argsstring>(Course course)</argsstring>
+        <name>hasCourseAlreadyBeenRecomended</name>
+        <param>
+          <type><ref refid="classsharp_advising_1_1_course" kindref="compound">Course</ref></type>
+          <declname>course</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="136" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="136" bodyend="147"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_time_filter_1a2daf9d0499171e75e2fdef52a0a33cac" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sharpAdvising.TimeFilter.courseNotCompleted</definition>
+        <argsstring>(string courseToBeTested, List&lt; string &gt; coursesTestedAgainst)</argsstring>
+        <name>courseNotCompleted</name>
+        <param>
+          <type>string</type>
+          <declname>courseToBeTested</declname>
+        </param>
+        <param>
+          <type>List&lt; string &gt;</type>
+          <declname>coursesTestedAgainst</declname>
+        </param>
+        <briefdescription>
+<para>pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="61" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="61" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>TODO: Update the time filter to deal with students not starting in quarter 0, If time allows should also be updated to include options to take x number of courses </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" line="17" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/TimeFilter.cs" bodystart="16" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classsharp_advising_1_1_time_filter_1aa75f6c377942064d87b3406ba1b0216d" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>addMatches</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a2daf9d0499171e75e2fdef52a0a33cac" prot="private" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>courseNotCompleted</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1ab1f917b0cc4a9c433c51c72b3fd951d9" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>hasCourseAlreadyBeenRecomended</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a0e355342ec2bb167960d2a933ea5fc8a" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>matches</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a18c8724d06cecaf5c16fc8b10c7a260c" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>potentialSchedule</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a015ecd651fdc5a6f2a694188e4d4e331" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>preReqsQualifiedfFor</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a9d251777f71a58d89250e0aacf8e0464" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>TimeFilter</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a49467bdeba56786ea8a11e88a9bafcae" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>TimeFilter</name></member>
+      <member refid="classsharp_advising_1_1_time_filter_1a1367c7ee387f287f05dc209b318ad00b" prot="public" virt="non-virtual"><scope>sharpAdvising::TimeFilter</scope><name>whichQuarter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

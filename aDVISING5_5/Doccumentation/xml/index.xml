@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
+  <compound refid="classsharp_advising_1_1_course" kind="class"><name>sharpAdvising::Course</name>
+    <member refid="classsharp_advising_1_1_course_1adb3934beca714ed707986be4b4b38491" kind="variable"><name>departmentID</name></member>
+    <member refid="classsharp_advising_1_1_course_1aac50724a94ab711b409b241b406e48ce" kind="variable"><name>numberID</name></member>
+    <member refid="classsharp_advising_1_1_course_1a7bafbae331464f4a53431ccafbbe2b78" kind="variable"><name>ownedTerms</name></member>
+    <member refid="classsharp_advising_1_1_course_1a7ddc5a5e0d22efa2b74b8ad5de62d4e4" kind="function"><name>Course</name></member>
+    <member refid="classsharp_advising_1_1_course_1a13932bdf08eb9e71b82ddd21abbd3fa4" kind="function"><name>Course</name></member>
+    <member refid="classsharp_advising_1_1_course_1a5370d043d8fb0a79d5744d9f6b69dee1" kind="function"><name>readDataForCourseName</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_course_stack" kind="class"><name>sharpAdvising::CourseStack</name>
+    <member refid="classsharp_advising_1_1_course_stack_1ae0dfbb0424ff8ded44d0e54fb4a66f53" kind="variable"><name>completeStack</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_1a571f1381a10704f6c52cf4142ed29253" kind="variable"><name>stack</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_1a61f03d577bd393cf7efd90c41247b65f" kind="function"><name>CourseStack</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_1a7bd1262604d5379eb702af56a18acf7c" kind="function"><name>getPreReqs</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_course_stack_node" kind="class"><name>sharpAdvising::CourseStackNode</name>
+    <member refid="classsharp_advising_1_1_course_stack_node_1a9327e837d316a384e89a9c42c104116f" kind="variable"><name>depID</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_node_1a04c5422f3e2c3cec10b6d46a1ce1f2d2" kind="variable"><name>numID</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_node_1ad7bfbfee25ba46428a9edfa1ef643e28" kind="variable"><name>Marker</name></member>
+    <member refid="classsharp_advising_1_1_course_stack_node_1affe3632ea1958e6c139e5def2effa51a" kind="function"><name>CourseStackNode</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_match" kind="class"><name>sharpAdvising::Match</name>
+    <member refid="classsharp_advising_1_1_match_1a0d9522a0af0bc8aa05e2b5c4c921e984" kind="variable"><name>departmentID</name></member>
+    <member refid="classsharp_advising_1_1_match_1ae4b94a1faa819596a2da335b668023c5" kind="variable"><name>numberID</name></member>
+    <member refid="classsharp_advising_1_1_match_1aafcc435a6b5bb54389ccde3130aa26bc" kind="variable"><name>sectionOptions</name></member>
+    <member refid="classsharp_advising_1_1_match_1a5035428506d1ed02032e6bd9b1d4ed4a" kind="function"><name>Match</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_pre_req" kind="class"><name>sharpAdvising::PreReq</name>
+    <member refid="classsharp_advising_1_1_pre_req_1a53d8ecac2d66f7d737e01b081d3c27d5" kind="function"><name>PreReq</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_program" kind="class"><name>sharpAdvising::Program</name>
+    <member refid="classsharp_advising_1_1_program_1a541df2002c7e980e886ac0f9a13b92ea" kind="function"><name>Main</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_quarter" kind="class"><name>sharpAdvising::Quarter</name>
+    <member refid="classsharp_advising_1_1_quarter_1a767a29ceb561fdc4602d32c4a764d260" kind="variable"><name>qNum</name></member>
+    <member refid="classsharp_advising_1_1_quarter_1a78e8bd679064fd961706d0d5e2b02d31" kind="variable"><name>courses</name></member>
+    <member refid="classsharp_advising_1_1_quarter_1ae1e49e31af402b9c7ace13c442bac6df" kind="property"><name>quarter</name></member>
+    <member refid="classsharp_advising_1_1_quarter_1aeb3e8d21cfdd886c332aab4272e58d72" kind="property"><name>Courses</name></member>
+    <member refid="classsharp_advising_1_1_quarter_1a9492e8146866aaf1b182a1f0a16d760e" kind="function"><name>Quarter</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_section" kind="class"><name>sharpAdvising::Section</name>
+    <member refid="classsharp_advising_1_1_section_1a71a3d3e83ad5e6d6649b0a80056c7f01" kind="variable"><name>daySchedule</name></member>
+    <member refid="classsharp_advising_1_1_section_1a416d0efc87823fb5cbe067ff919b909f" kind="variable"><name>sectionID</name></member>
+    <member refid="classsharp_advising_1_1_section_1ad36bb7b6f94d7253d267b3bd06127716" kind="function"><name>Section</name></member>
+    <member refid="classsharp_advising_1_1_section_1ac712ff5abbdc1613719f18ff6e4c58a6" kind="function"><name>Section</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_s_q_l_h_a_n_d_l_e_r" kind="class"><name>sharpAdvising::SQLHANDLER</name>
+    <member refid="classsharp_advising_1_1_s_q_l_h_a_n_d_l_e_r_1abfdef870c6394820de55cfa249868d0f" kind="variable"><name>myConnection</name></member>
+    <member refid="classsharp_advising_1_1_s_q_l_h_a_n_d_l_e_r_1a9d2128156781c470508a9eae3e20ffb7" kind="variable"><name>myConnection2</name></member>
+    <member refid="classsharp_advising_1_1_s_q_l_h_a_n_d_l_e_r_1a3b01c264f29e19e18e373409865ddbfe" kind="function"><name>start</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_term" kind="class"><name>sharpAdvising::Term</name>
+    <member refid="classsharp_advising_1_1_term_1a4ebdc80552669f0009af7b177c12156c" kind="variable"><name>termID</name></member>
+    <member refid="classsharp_advising_1_1_term_1ad541dc454b5c03a0bbec904d60432711" kind="variable"><name>ownedSections</name></member>
+    <member refid="classsharp_advising_1_1_term_1ad0eeabc7337bc41ed5dce495299af3a5" kind="function"><name>Term</name></member>
+    <member refid="classsharp_advising_1_1_term_1a081bd6faa0ba3f45853e9b643c30bd37" kind="function"><name>Term</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_time_filter" kind="class"><name>sharpAdvising::TimeFilter</name>
+    <member refid="classsharp_advising_1_1_time_filter_1a015ecd651fdc5a6f2a694188e4d4e331" kind="variable"><name>preReqsQualifiedfFor</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a18c8724d06cecaf5c16fc8b10c7a260c" kind="variable"><name>potentialSchedule</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a0e355342ec2bb167960d2a933ea5fc8a" kind="variable"><name>matches</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a9d251777f71a58d89250e0aacf8e0464" kind="function"><name>TimeFilter</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a49467bdeba56786ea8a11e88a9bafcae" kind="function"><name>TimeFilter</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a1367c7ee387f287f05dc209b318ad00b" kind="function"><name>whichQuarter</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1aa75f6c377942064d87b3406ba1b0216d" kind="function"><name>addMatches</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1ab1f917b0cc4a9c433c51c72b3fd951d9" kind="function"><name>hasCourseAlreadyBeenRecomended</name></member>
+    <member refid="classsharp_advising_1_1_time_filter_1a2daf9d0499171e75e2fdef52a0a33cac" kind="function"><name>courseNotCompleted</name></member>
+  </compound>
+  <compound refid="classsharp_advising_1_1_times" kind="class"><name>sharpAdvising::Times</name>
+    <member refid="classsharp_advising_1_1_times_1a00acfc41b5166fcb7daa8e7e42d4a3e6" kind="variable"><name>day</name></member>
+    <member refid="classsharp_advising_1_1_times_1ab18252018ca3dfc811f02adf425a922c" kind="variable"><name>startTime</name></member>
+    <member refid="classsharp_advising_1_1_times_1adfa1d91738c732f50b85bce0cddd3124" kind="variable"><name>endTime</name></member>
+    <member refid="classsharp_advising_1_1_times_1a425340682e92bcfc9b558e2bb5f954b7" kind="function"><name>Times</name></member>
+  </compound>
+  <compound refid="namespacesharp_advising" kind="namespace"><name>sharpAdvising</name>
+  </compound>
+  <compound refid="namespace_system" kind="namespace"><name>System</name>
+  </compound>
+  <compound refid="namespace_system_1_1_collections_1_1_generic" kind="namespace"><name>System::Collections::Generic</name>
+  </compound>
+  <compound refid="namespace_system_1_1_collections_1_1_specialized" kind="namespace"><name>System::Collections::Specialized</name>
+  </compound>
+  <compound refid="namespace_system_1_1_data_1_1_sql_client" kind="namespace"><name>System::Data::SqlClient</name>
+  </compound>
+  <compound refid="namespace_system_1_1_i_o" kind="namespace"><name>System::IO</name>
+  </compound>
+  <compound refid="namespace_system_1_1_linq" kind="namespace"><name>System::Linq</name>
+  </compound>
+  <compound refid="namespace_system_1_1_reflection" kind="namespace"><name>System::Reflection</name>
+  </compound>
+  <compound refid="namespace_system_1_1_runtime_1_1_compiler_services" kind="namespace"><name>System::Runtime::CompilerServices</name>
+  </compound>
+  <compound refid="namespace_system_1_1_runtime_1_1_interop_services" kind="namespace"><name>System::Runtime::InteropServices</name>
+  </compound>
+  <compound refid="namespace_system_1_1_text" kind="namespace"><name>System::Text</name>
+  </compound>
+  <compound refid="namespace_system_1_1_threading_1_1_tasks" kind="namespace"><name>System::Threading::Tasks</name>
+  </compound>
+  <compound refid="namespace_system_1_1_xml_1_1_serialization" kind="namespace"><name>System::Xml::Serialization</name>
+  </compound>
+  <compound refid="_course_8cs" kind="file"><name>Course.cs</name>
+  </compound>
+  <compound refid="_course_stack_8cs" kind="file"><name>CourseStack.cs</name>
+  </compound>
+  <compound refid="_course_stack_node_8cs" kind="file"><name>CourseStackNode.cs</name>
+  </compound>
+  <compound refid="_match_8cs" kind="file"><name>Match.cs</name>
+  </compound>
+  <compound refid="_temporary_generated_file__036_c0_b5_b-1481-4323-8_d20-8_f5_a_d_c_b23_d92_8cs" kind="file"><name>TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs</name>
+  </compound>
+  <compound refid="_temporary_generated_file__5937a670-0e60-4077-877b-f7221da3dda1_8cs" kind="file"><name>TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs</name>
+  </compound>
+  <compound refid="_temporary_generated_file___e7_a71_f73-0_f8_d-4_b9_b-_b56_e-8_e70_b10_b_c5_d3_8cs" kind="file"><name>TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs</name>
+  </compound>
+  <compound refid="_pre_req_8cs" kind="file"><name>PreReq.cs</name>
+  </compound>
+  <compound refid="_program_8cs" kind="file"><name>Program.cs</name>
+  </compound>
+  <compound refid="_assembly_info_8cs" kind="file"><name>AssemblyInfo.cs</name>
+  </compound>
+  <compound refid="_quarter_8cs" kind="file"><name>Quarter.cs</name>
+  </compound>
+  <compound refid="_section_8cs" kind="file"><name>Section.cs</name>
+  </compound>
+  <compound refid="_s_q_l_h_a_n_d_l_e_r_8cs" kind="file"><name>SQLHANDLER.cs</name>
+  </compound>
+  <compound refid="_term_8cs" kind="file"><name>Term.cs</name>
+  </compound>
+  <compound refid="_time_filter_8cs" kind="file"><name>TimeFilter.cs</name>
+  </compound>
+  <compound refid="_times_8cs" kind="file"><name>Times.cs</name>
+  </compound>
+  <compound refid="dir_3a2fe4d6cbd977ad6b6819eb0c5e874d" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System</name>
+  </compound>
+  <compound refid="dir_a3c19ba2fa4cfb74178b8eb3a5a55584" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5</name>
+  </compound>
+  <compound refid="dir_293f346403dd1a087bda895df6ed6a4d" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System/aDVISING5_5</name>
+  </compound>
+  <compound refid="dir_e1f23813fed068140dc3f9e4e62ab1fb" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/obj/Debug</name>
+  </compound>
+  <compound refid="dir_01519ffa3e40bb5ebff26749f59d2f3d" kind="dir"><name>C:/Users/Eric/Desktop</name>
+  </compound>
+  <compound refid="dir_bc2b495b0e4df4e04327641d0b1e06ea" kind="dir"><name>C:/Users/Eric</name>
+  </compound>
+  <compound refid="dir_6693f179d6f64e4421a2c8dae9bdb4d4" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/obj</name>
+  </compound>
+  <compound refid="dir_5676801efc7486653a6250d74a319c71" kind="dir"><name>C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Properties</name>
+  </compound>
+  <compound refid="dir_d522931ffa1371640980b621734a4381" kind="dir"><name>C:/Users</name>
+  </compound>
+</doxygenindex>

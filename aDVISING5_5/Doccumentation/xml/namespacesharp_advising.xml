@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespacesharp_advising" kind="namespace" language="C#">
+    <compoundname>sharpAdvising</compoundname>
+    <innerclass refid="classsharp_advising_1_1_course" prot="public">sharpAdvising::Course</innerclass>
+    <innerclass refid="classsharp_advising_1_1_course_stack" prot="public">sharpAdvising::CourseStack</innerclass>
+    <innerclass refid="classsharp_advising_1_1_course_stack_node" prot="public">sharpAdvising::CourseStackNode</innerclass>
+    <innerclass refid="classsharp_advising_1_1_match" prot="public">sharpAdvising::Match</innerclass>
+    <innerclass refid="classsharp_advising_1_1_pre_req" prot="public">sharpAdvising::PreReq</innerclass>
+    <innerclass refid="classsharp_advising_1_1_program" prot="public">sharpAdvising::Program</innerclass>
+    <innerclass refid="classsharp_advising_1_1_quarter" prot="public">sharpAdvising::Quarter</innerclass>
+    <innerclass refid="classsharp_advising_1_1_section" prot="public">sharpAdvising::Section</innerclass>
+    <innerclass refid="classsharp_advising_1_1_s_q_l_h_a_n_d_l_e_r" prot="public">sharpAdvising::SQLHANDLER</innerclass>
+    <innerclass refid="classsharp_advising_1_1_term" prot="public">sharpAdvising::Term</innerclass>
+    <innerclass refid="classsharp_advising_1_1_time_filter" prot="public">sharpAdvising::TimeFilter</innerclass>
+    <innerclass refid="classsharp_advising_1_1_times" prot="public">sharpAdvising::Times</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Course.cs" line="11" column="1"/>
+  </compounddef>
+</doxygen>

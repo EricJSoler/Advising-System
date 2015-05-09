@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classsharp_advising_1_1_match" kind="class" language="C#" prot="public">
+    <compoundname>sharpAdvising::Match</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsharp_advising_1_1_match_1a0d9522a0af0bc8aa05e2b5c4c921e984" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.Match.departmentID</definition>
+        <argsstring></argsstring>
+        <name>departmentID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" line="19" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_match_1ae4b94a1faa819596a2da335b668023c5" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string sharpAdvising.Match.numberID</definition>
+        <argsstring></argsstring>
+        <name>numberID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" line="20" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsharp_advising_1_1_match_1aafcc435a6b5bb54389ccde3130aa26bc" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="classsharp_advising_1_1_section" kindref="compound">Section</ref> &gt;</type>
+        <definition>List&lt;Section&gt; sharpAdvising.Match.sectionOptions</definition>
+        <argsstring></argsstring>
+        <name>sectionOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" line="21" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_match_1a5035428506d1ed02032e6bd9b1d4ed4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.Match.Match</definition>
+        <argsstring>()</argsstring>
+        <name>Match</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" line="14" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" bodystart="14" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classsharp_advising_1_1_match" kindref="compound">Match</ref> simply holds the department id and number id for a course this will most likely be used for output </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" line="13" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/Match.cs" bodystart="12" bodyend="23"/>
+    <listofallmembers>
+      <member refid="classsharp_advising_1_1_match_1a0d9522a0af0bc8aa05e2b5c4c921e984" prot="public" virt="non-virtual"><scope>sharpAdvising::Match</scope><name>departmentID</name></member>
+      <member refid="classsharp_advising_1_1_match_1a5035428506d1ed02032e6bd9b1d4ed4a" prot="public" virt="non-virtual"><scope>sharpAdvising::Match</scope><name>Match</name></member>
+      <member refid="classsharp_advising_1_1_match_1ae4b94a1faa819596a2da335b668023c5" prot="public" virt="non-virtual"><scope>sharpAdvising::Match</scope><name>numberID</name></member>
+      <member refid="classsharp_advising_1_1_match_1aafcc435a6b5bb54389ccde3130aa26bc" prot="public" virt="non-virtual"><scope>sharpAdvising::Match</scope><name>sectionOptions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
