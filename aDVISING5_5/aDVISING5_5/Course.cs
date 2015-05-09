@@ -4,44 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Xml.Serialization;//added 2/25
+using System.Xml.Serialization;
 using System.IO;
 
 namespace sharpAdvising
 {
-    public class Course
+  
+
+    /// <summary>
+    /// Course: Stores and pulls information about individual courses for the forseable future.
+    /// Usability: Create a course with the constructor accepting a string refering to the numberID of the course to pull information for and a string refering to the department ID of the course to pull information for
+    ///  It owns a list of Term objects which each term (i.e. Fall, Winter etc...) owns a list of sections that contain specific information about the courses different oferring times.
+    ///  Once this object is created you can navigate through its list of Term objects "ownedTerms" and through "ownedTerms" list of Section objects "ownedSections" to compare the times that offered between different courses.
+    /// </summary>
+    public class Course 
     {
-        public Course(Course previousCourse)//Copy constructor started working on but I dont think i need it 
-        {
-            courseID = previousCourse.courseID;
-            foreach (Term elementT in previousCourse.ownedTerms)
-            {
-                foreach(Section elementS in elementT.ownedSections)
-                {
-
-                }
-            }
-        }
-        public Course()//Default constructor I know it should do something but I dont really know what so im just gonna create the stuff but empty for now cuz ya
-        {
-            ownedTerms = new List<Term>();
-        }
-
-        public Course(string name)
-        {
-            //THis was for error just temporary Eventually this will replace the function below but for now the stored procedure requires me to pass in two string when I only want to pass one since that is the input im recieveing
-        }
-
+     public Course()
+        { }
+        
         public Course(string numID, string dID)
         {
             ownedTerms = new List<Term>();
-            courseID = numID;
-            readDataForCourseName(dID, numID);
+            numberID = numID;
+            departmentID = dID;
+            readDataForCourseName(departmentID, numberID);
         }
 
-        public string courseID;
-        private string departmentID;
-        private string NumberID;
+       
+        public string departmentID;
+        public string numberID;
         public List<Term> ownedTerms;
 
 

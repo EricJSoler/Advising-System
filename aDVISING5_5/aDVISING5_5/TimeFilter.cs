@@ -8,46 +8,33 @@ using System.IO;
 
 namespace sharpAdvising
 {
+    /// <summary>
+    /// TODO: Update the time filter to deal with students not starting in quarter 0, If time allows should also be updated to include options to take x number of courses
+    /// </summary>
+
+   
     public class TimeFilter
     {
 
-        public TimeFilter()//The default construct will simple create a schedule with one class in it
+        public TimeFilter()
         {
-            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml"); //Hey i want this to be read only how does AsReadOnly Look?
-            List<Course> PotentialSchedule = new List<Course>();
-            PotentialSchedule.Add(new Course(preReqsQualifiedfFor[0].courses[0]));
 
         }
-
-        public TimeFilter(int numberOfClasses)//This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
+       
+        public TimeFilter(int numberOfClasses)///This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
         {
-            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
-            List<Course> PotentialSchedule = new List<Course>();
-
-            //int availableCourseCounter = 0;
-            //foreach (string element in preReqsQualifiedfFor[0].courses)
-            //{
-            //    availableCourseCounter++;
-            //}
-
-            //if (availableCourseCounter < numberOfClasses)
-            //{
-            //    numberOfClasses = availableCourseCounter;
-            //}
+            List<Course> PotentialSchedule = new List<Course>();///TODO: this potentialSchedule should come from the Pre-Req filter maybeRename it as coursesQualified for
 
 
-
-            for (int i = 0; i < numberOfClasses; i++)
+            for (int i = 0; i < numberOfClasses; i++)///TODO: this loop should be performed on the coursesQualifed for the comes from the PreReq Filter
             {
-
-                //PotentialSchedule.Add(new Course(preReqsQualifiedfFor[0].courses[i])); THIS IS THE REAL CODE BUT FOR NOW I DONT WANNA SPLIT UP THE COURSE IDS INTO WHAT THEY NEED TO BE FOR THE DATA BASE
                 string numID;
                 string dID;
                 Console.WriteLine("input d id");
                 dID = Console.ReadLine();
                 Console.WriteLine("input a num id");
                 numID = Console.ReadLine();
-                PotentialSchedule.Add(new Course(numID, dID));
+                PotentialSchedule.Add((new Course(numID, dID)));
                 Console.WriteLine("you done homie");
             }
             matches = new List<Match>();
@@ -55,52 +42,23 @@ namespace sharpAdvising
             foreach (Course element in PotentialSchedule)
             {
                 addMatches(element,0);
-                //PotentialSchedule.RemoveAt(0);     
+                //If we were allowed to schedule the course remove it     
             }
             Console.WriteLine("here is where I stopped");
         }
 
-        public TimeFilter(int numberOfClassesRequested, List<string> classesAlreadyCompleted)//This will establish a schedule for a student that has already recieved some college creditis
-        {
-            //preReqsQualifiedfFor = LoadPreReqsFromFile("ClassOrder.xml");
-            potentialSchedule = new List<Course>();
 
-            int j = 0;
-            do
-            {
-                for (int i = 0; i < preReqsQualifiedfFor[j].courses.Count; i++)
-                {
-                    if (courseNotCompleted(preReqsQualifiedfFor[j].courses[i], classesAlreadyCompleted))
-                    {
-                        potentialSchedule.Add(new Course(preReqsQualifiedfFor[j].courses[i]));
-                    }
+        
 
-                }
-                j++;
-            } while (potentialSchedule.Count < numberOfClassesRequested);
 
-        }
-
-        //public List<Quarter> LoadPreReqsFromFile(string fileName)//Load the "XML1" a list of pre requisites from preReq Module
-        //{
-        //    using (var stream = new FileStream(fileName, FileMode.Open))
-        //    {
-        //        var XML = new XmlSerializer(typeof(List<Quarter>));
-        //        return (List<Quarter>)XML.Deserialize(stream);
-        //    }
-        //}
-        public int coursesInQuarterNode(int quarterNode)
-        {
-            return preReqsQualifiedfFor[quarterNode].courses.Count;
-        }
         public int whichQuarter()
         {
             int x = 0;
-            return x++;
+            return (x++);
         }
 
 
-        private bool courseNotCompleted(string courseToBeTested, List<string> coursesTestedAgainst)//pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata
+        private bool courseNotCompleted(string courseToBeTested, List<string> coursesTestedAgainst)///pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata
         {
             int count = 0;
             foreach (string element in coursesTestedAgainst)
@@ -115,18 +73,19 @@ namespace sharpAdvising
         }
         public List<Quarter> preReqsQualifiedfFor;
         public List<Course> potentialSchedule;
-        public List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
+        public List<Match> matches; ///This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
 
         public void addMatches(Course recievedCourse, int termNum)
         {
             int count = (matches.Count());
             matches.Add(new Match());
-            matches[count].courseName = recievedCourse.courseID;
+            matches[count].departmentID = recievedCourse.departmentID;
+            matches[count].numberID = recievedCourse.numberID;
             if (count == 0)
             {
                 foreach (Section ele in recievedCourse.ownedTerms[termNum].ownedSections)
                     matches[0].sectionOptions.Add(new Section(ele.sectionID));
-                return;//I know im not supossed to return from a void function but Im pretty sure I read that this will just end the function
+                return;
             }
 
             bool matchHasPriority = false;
@@ -137,7 +96,7 @@ namespace sharpAdvising
             {
                 for (int j = 0; j < (matches[i].sectionOptions.Count()); j++ )
                 {
-                    for (int k = 0; k < (recievedCourse.ownedTerms[termNum].ownedSections.Count());k++ )//replace this 0 with an integer that depends on the qquarter you are filling
+                    for (int k = 0; k < (recievedCourse.ownedTerms[termNum].ownedSections.Count());k++ )//replace this 0 with an integer that depends on the quarter you are filling
                     {
 
                         int sizeOfSectionForMatch = matches[i].sectionOptions.Count();
@@ -148,15 +107,15 @@ namespace sharpAdvising
                             courseHasPriority = true;
                         if (recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority && matchHasPriority)//FIX THIS
                         {
-                            Console.WriteLine("THese classes overlap");
+                            Console.WriteLine("These classes overlap");
 
-                            //I NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
+                            ///TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
                             matches.RemoveAt(count);
                             return;
                         }
                         else if (matchHasPriority && recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID)
                         {
-                            //DO NOTHING I need thin here so that last else doesnt get executed
+                            //DO NOTHING This is here to avoid that last else from being executed theres probably a better way to do this but serves its purpose
                         }
                         else if (recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID && !matchHasPriority)
                         {
@@ -174,11 +133,11 @@ namespace sharpAdvising
             }
         }
 
-        public bool hasCourseAlreadyBeenRecomended(Course cour)
+        public bool hasCourseAlreadyBeenRecomended(Course course)
         {
             foreach (Match element in matches)
             {
-                if (cour.courseID == element.courseName)
+                if (course.departmentID == element.departmentID && course.numberID == element.numberID)
                 {
                     return true;
                 }

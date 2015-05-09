@@ -9,11 +9,23 @@ using System.IO;
 
 namespace sharpAdvising
 {
+    /// <summary>
+    /// This is the module currently being worked on and needs to build an object made up of courses that a student is qualified for
+    /// </summary>
     public class PreReq
     {
 
         public PreReq()
         {
+
+            string depIDHighestMath;
+            string numIDHighestMath;
+            depIDHighestMath = Console.ReadLine();
+            numIDHighestMath = Console.ReadLine();
+            CourseStack first = new CourseStack(depIDHighestMath,numIDHighestMath, false);
+
+
+            ////
             string num;
             string dep;
             Console.WriteLine("inpout department ID");

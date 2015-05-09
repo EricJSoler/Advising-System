@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classsharp_advising_1_1_pre_req" kind="class" language="C#" prot="public">
+    <compoundname>sharpAdvising::PreReq</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharp_advising_1_1_pre_req_1a53d8ecac2d66f7d737e01b081d3c27d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sharpAdvising.PreReq.PreReq</definition>
+        <argsstring>()</argsstring>
+        <name>PreReq</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/PreReq.cs" line="18" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/PreReq.cs" bodystart="18" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This is the module currently being worked on and needs to build an object made up of courses that a student is qualified for </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/PreReq.cs" line="16" column="1" bodyfile="C:/Users/Eric/Desktop/Advising-System/aDVISING5_5/aDVISING5_5/PreReq.cs" bodystart="15" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classsharp_advising_1_1_pre_req_1a53d8ecac2d66f7d737e01b081d3c27d5" prot="public" virt="non-virtual"><scope>sharpAdvising::PreReq</scope><name>PreReq</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

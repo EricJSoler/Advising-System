@@ -10,3 +10,9 @@ F:\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
 F:\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
 F:\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
 F:\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe.config
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.exe
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
+C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache

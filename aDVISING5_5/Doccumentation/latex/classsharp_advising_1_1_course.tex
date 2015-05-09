@@ -1,0 +1,76 @@
+\section{sharp\+Advising.\+Course Class Reference}
+\label{classsharp_advising_1_1_course}\index{sharp\+Advising.\+Course@{sharp\+Advising.\+Course}}
+
+
+\doxyref{Course}{p.}{classsharp_advising_1_1_course}\+: Stores and pulls information about individual courses for the forseable future. Usability\+: Create a course with the constructor accepting a string refering to the number\+I\+D of the course to pull information for and a string refering to the department I\+D of the course to pull information for It owns a list of \doxyref{Term}{p.}{classsharp_advising_1_1_term} objects which each term (i.\+e. Fall, Winter etc...) owns a list of sections that contain specific information about the courses different oferring times. Once this object is created you can navigate through its list of \doxyref{Term}{p.}{classsharp_advising_1_1_term} objects \char`\"{}owned\+Terms\char`\"{} and through \char`\"{}owned\+Terms\char`\"{} list of \doxyref{Section}{p.}{classsharp_advising_1_1_section} objects \char`\"{}owned\+Sections\char`\"{} to compare the times that offered between different courses.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Course} ()
+\item 
+{\bf Course} (string num\+I\+D, string d\+I\+D)
+\item 
+void {\bf read\+Data\+For\+Course\+Name} (string d\+I\+D, string n\+I\+D)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf department\+I\+D}
+\item 
+string {\bf number\+I\+D}
+\item 
+List$<$ {\bf Term} $>$ {\bf owned\+Terms}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\doxyref{Course}{p.}{classsharp_advising_1_1_course}\+: Stores and pulls information about individual courses for the forseable future. Usability\+: Create a course with the constructor accepting a string refering to the number\+I\+D of the course to pull information for and a string refering to the department I\+D of the course to pull information for It owns a list of \doxyref{Term}{p.}{classsharp_advising_1_1_term} objects which each term (i.\+e. Fall, Winter etc...) owns a list of sections that contain specific information about the courses different oferring times. Once this object is created you can navigate through its list of \doxyref{Term}{p.}{classsharp_advising_1_1_term} objects \char`\"{}owned\+Terms\char`\"{} and through \char`\"{}owned\+Terms\char`\"{} list of \doxyref{Section}{p.}{classsharp_advising_1_1_section} objects \char`\"{}owned\+Sections\char`\"{} to compare the times that offered between different courses. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!Course@{Course}}
+\index{Course@{Course}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{Course}]{\setlength{\rightskip}{0pt plus 5cm}sharp\+Advising.\+Course.\+Course (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsharp_advising_1_1_course_a7ddc5a5e0d22efa2b74b8ad5de62d4e4}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!Course@{Course}}
+\index{Course@{Course}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{Course}]{\setlength{\rightskip}{0pt plus 5cm}sharp\+Advising.\+Course.\+Course (
+\begin{DoxyParamCaption}
+\item[{string}]{num\+I\+D, }
+\item[{string}]{d\+I\+D}
+\end{DoxyParamCaption}
+)}\label{classsharp_advising_1_1_course_a13932bdf08eb9e71b82ddd21abbd3fa4}
+
+
+\subsection{Member Function Documentation}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!read\+Data\+For\+Course\+Name@{read\+Data\+For\+Course\+Name}}
+\index{read\+Data\+For\+Course\+Name@{read\+Data\+For\+Course\+Name}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{read\+Data\+For\+Course\+Name}]{\setlength{\rightskip}{0pt plus 5cm}void sharp\+Advising.\+Course.\+read\+Data\+For\+Course\+Name (
+\begin{DoxyParamCaption}
+\item[{string}]{d\+I\+D, }
+\item[{string}]{n\+I\+D}
+\end{DoxyParamCaption}
+)}\label{classsharp_advising_1_1_course_a5370d043d8fb0a79d5744d9f6b69dee1}
+
+
+\subsection{Member Data Documentation}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!department\+I\+D@{department\+I\+D}}
+\index{department\+I\+D@{department\+I\+D}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{department\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}string sharp\+Advising.\+Course.\+department\+I\+D}\label{classsharp_advising_1_1_course_adb3934beca714ed707986be4b4b38491}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!number\+I\+D@{number\+I\+D}}
+\index{number\+I\+D@{number\+I\+D}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{number\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}string sharp\+Advising.\+Course.\+number\+I\+D}\label{classsharp_advising_1_1_course_aac50724a94ab711b409b241b406e48ce}
+\index{sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}!owned\+Terms@{owned\+Terms}}
+\index{owned\+Terms@{owned\+Terms}!sharp\+Advising\+::\+Course@{sharp\+Advising\+::\+Course}}
+\subsubsection[{owned\+Terms}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Term}$>$ sharp\+Advising.\+Course.\+owned\+Terms}\label{classsharp_advising_1_1_course_a7bafbae331464f4a53431ccafbbe2b78}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Eric/\+Desktop/\+Advising-\/\+System/a\+D\+V\+I\+S\+I\+N\+G5\+\_\+5/a\+D\+V\+I\+S\+I\+N\+G5\+\_\+5/{\bf Course.\+cs}\end{DoxyCompactItemize}
