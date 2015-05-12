@@ -9,89 +9,60 @@ using System.IO;
 
 namespace sharpAdvising
 {
-    
-   
+
+
     /// <summary>
     ///CourseStack temporary garbage code I was playing with but contains a function I dont want to delete yet 
     /// </summary>
     public class CourseStack
     {
-
-        public CourseStack(string department, string number, bool a)
+        public CourseStack()
         {
-            completeStack = a;
-            List<CourseStackNode> stack = new List<CourseStackNode>();
-            CourseStackNode goal = new CourseStackNode();
-            goal.depID = department;
-            goal.numID = number;
-            goal.Marker = null;
-            stack.Add(goal);
+            complete = false;
 
-            if (!completeStack)
-            {//Read these values from the Degree Table
-                string num;
-                string dep;
-                //Console.WriteLine("input department ID");
-                //dep = Console.ReadLine();
-
-                //Console.WriteLine("input number ID");
-                //num = Console.ReadLine();
-
-
-            
-            }
         }
 
-        //Change this make it multidimensional
-        bool getPreReqs(string depID, string numID)
+        public CourseStack(string dep, string numID)
+        {
+            department = dep;
+            numberID = numID;
+            fillStack();
+        }
+
+        private void fillStack()
         {
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
-            CourseStackNode next;
 
-            cmd.CommandText = "dbo.read_by_dep_num";
+            cmd.CommandText = "dbo.read_nodeID_by_departmentID_numberID";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@DepartmentID", depID));
-            cmd.Parameters.Add(new SqlParameter("@NumberID", numID));
+            cmd.Parameters.Add(new SqlParameter("@DepartmentID", department));
+            cmd.Parameters.Add(new SqlParameter("@NumberID", numberID));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
-            int k = 0;
+
+            string readValue;
             while (reader.Read())
             {
-                k++;
-                int fieldCount = reader.FieldCount;
-                for (int i = 0; i < fieldCount; i++)
-                {
-                    string colName = reader.GetName(i);
-                    string readValue = reader.GetValue(i).ToString();
-                    if (colName == "PreReqDepartmentID")
-                    {
-                        next = new CourseStackNode();
-                        next.depID = readValue;
-                        stack.Add(next);
-                    }
-                    else if (colName == "PreReqNumberID")
-                    {
-                        stack[k].numID = readValue;
-                    }
-                    else if (colName == "Marker")
-                    {
-                        stack[k].Marker = readValue;
-                    }
-                    Console.WriteLine("we here");
-                }
+                readValue = reader.GetValue(0).ToString();
 
             }
+            reader.Close();    
 
-            reader.Close();
-            return true;
         }
 
-        bool completeStack;
+        private 
+
+        
 
 
-
-        public List<CourseStackNode> stack;
+        string department;
+        string numberID;
+        bool complete;
+        List<Course> cStack;
     }
+
+
+
 }
