@@ -20,3 +20,13 @@ C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFr
 C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.xml
 C:\Users\Eric\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe.config
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.exe
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.dll
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.xml
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
