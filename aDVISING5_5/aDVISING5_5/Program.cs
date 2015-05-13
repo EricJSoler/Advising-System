@@ -16,9 +16,14 @@ namespace sharpAdvising
         {
 
             SQLHANDLER.start();
+            
 
+            ///Recieve all this from the user
             String recievedDegree;///TODO:For our final product recievedDegree and quarterOfEnrollment will be coming in most likely from a windows form application for now we will just input them into the console
             String quarterOfEnrollment;
+            math = new Course("144", "MATH");//these are the courses a student is qualified to take in their respective fields
+            chemistry = new Course("141", "CHEM");
+            english = new Course("98", "ENGL");
 
            // recievedDegree = Console.ReadLine();
             //quarterOfEnrollment = Console.ReadLine();
@@ -26,6 +31,11 @@ namespace sharpAdvising
             TimeFilter test = new TimeFilter(3);
           
         }
+
+
+        public static Course math;
+        public static Course chemistry;
+        public static Course english;
 
         
     }

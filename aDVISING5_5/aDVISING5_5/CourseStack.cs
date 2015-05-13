@@ -26,18 +26,45 @@ namespace sharpAdvising
         {
             department = dep;
             numberID = numID;
-            fillStack();
+            if (department == "MATH")
+            {
+                startingPoint = Program.math;
+            }
+            else if (department == "CHEM")
+            {
+                startingPoint = Program.chemistry;
+            }
+            else if (department == "ENGL")
+            {
+                startingPoint = Program.english;
+            }
+            else if (department == "PHYS")
+            {
+                startingPoint = new Course("114", "PHYS");
+            }
+
+
+            bool hadAStartingPoint = findStartNodeID();
+            findGoalNodeID();
+            if (hadAStartingPoint)
+            {
+                this.cStack.Add(new CourseStackNode(startingPoint.departmentID, startingPoint.numberID));
+                fillStack(); //From here on
+            }
+
+
         }
 
-        private void fillStack()
+        public void findGoalNodeID()
         {
+            goalNodeIDs = new List<string>();
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
             cmd.CommandText = "dbo.read_nodeID_by_departmentID_numberID";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@DepartmentID", department));
-            cmd.Parameters.Add(new SqlParameter("@NumberID", numberID));
+            cmd.Parameters.Add(new SqlParameter("@DepartmentID", this.department));
+            cmd.Parameters.Add(new SqlParameter("@NumberID", this.numberID));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
@@ -46,21 +73,89 @@ namespace sharpAdvising
             while (reader.Read())
             {
                 readValue = reader.GetValue(0).ToString();
-
+                goalNodeIDs.Add(readValue);
             }
             reader.Close();    
+          
 
         }
 
-        private 
+        public bool findStartNodeID()
+        {
+            startingNodeIDs = new List<string>();
+          if(startingPoint != null)
+          {
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
 
-        
+            cmd.CommandText = "dbo.read_nodeID_by_departmentID_numberID";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@DepartmentID", startingPoint.departmentID));
+            cmd.Parameters.Add(new SqlParameter("@NumberID", startingPoint.numberID));
+            cmd.Connection = SQLHANDLER.myConnection2;
+
+            reader = cmd.ExecuteReader();
+
+            string readValue;
+            while (reader.Read())
+            {
+                readValue = reader.GetValue(0).ToString();
+                startingNodeIDs.Add(readValue);
+            }
+            reader.Close();    
+           
+           return true;
+          }
+            return false;
+        }
+
+        private void fillStack()
+        {
+            string readValue = null;
+            string nextNode = null;
+
+            nextNode = findNextNode()//
+            while(!(goalNodeIDs.Contains(nextNode)))///TODO: Figure out how to deal with ands
+            {
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "dbo.read_departmentID_programID_by_nodeID";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@nodeID", department));
+            cmd.Connection = SQLHANDLER.myConnection2;
+
+            reader = cmd.ExecuteReader();
+
+            
+            while (reader.Read())
+            {
+                readValue = reader.GetValue(0).ToString();
+               
+
+            }
+            reader.Close();
+            }
+
+        }
+
+        private string findNextNode(string node)
+        {
+            return node += ".1";
+        }
+
+       
 
 
-        string department;
-        string numberID;
+
+
+        public string department;
+        public string numberID;
+        List<string> goalNodeIDs;
         bool complete;
-        List<Course> cStack;
+        List<CourseStackNode> cStack;
+        Course startingPoint;
+        List<string> startingNodeIDs;
     }
 
 

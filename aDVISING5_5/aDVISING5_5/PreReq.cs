@@ -46,8 +46,23 @@ namespace sharpAdvising
             reader.Close();
 
             Console.WriteLine("we here");
+            requirementsForEachCourse = new List<CourseStack>();
+            fillStackForEachCourse();
+            
         }
 
+        private void fillStackForEachCourse()
+        {
+            foreach (Subject element in subjectRequirements)
+            {
+                foreach (Course ele in element.coursesReq)
+                {
+                    requirementsForEachCourse.Add(new CourseStack(ele.departmentID, ele.numberID));
+                }
+                
+            }
+        }
+        
         private bool subjectAlreadyAdded(string test)
         {
             foreach(Subject element in subjectRequirements)
@@ -58,8 +73,8 @@ namespace sharpAdvising
             return false;
         }
 
-
+      public List<CourseStack> requirementsForEachCourse;
       public static string program;
-      List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
+      public List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
     }
 }

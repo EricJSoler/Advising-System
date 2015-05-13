@@ -13,8 +13,14 @@ namespace sharpAdvising
         {
 
         }
-            public string depID;
-            public string numID;
+
+        public CourseStackNode(string depID, string numID)
+        {
+            departmentID = depID;
+            numberID = numID;
+        }
+            public string departmentID;
+            public string numberID;
             public string Marker;
    
     }
