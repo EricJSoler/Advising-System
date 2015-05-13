@@ -43,7 +43,7 @@ namespace sharpAdvising
                 startingPoint = new Course("114", "PHYS");
             }
 
-
+            cStack = new List<CourseStackNode>();
             bool hadAStartingPoint = findStartNodeID();
             findGoalNodeID();
             if (hadAStartingPoint)
@@ -111,18 +111,18 @@ namespace sharpAdvising
 
         private void fillStack()
         {
-            string readValue = null;
+            string readDepartment = null;
             string nextNode = null;
-
-            nextNode = findNextNode()//
-            while(!(goalNodeIDs.Contains(nextNode)))///TODO: Figure out how to deal with ands
+            string readNumberID = null;
+            nextNode = findNextNode(startingNodeIDs[0]);//
+            while(!(goalNodeIDs.Contains(nextNode)))///TODO: Figure out how to deal with ands //6.1.1.1.1
             {
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
             cmd.CommandText = "dbo.read_departmentID_programID_by_nodeID";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@nodeID", department));
+            cmd.Parameters.Add(new SqlParameter("@nodeID", nextNode));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
@@ -130,13 +130,14 @@ namespace sharpAdvising
             
             while (reader.Read())
             {
-                readValue = reader.GetValue(0).ToString();
-               
-
+                readDepartment = reader.GetValue(0).ToString();
+                readNumberID = reader.GetValue(1).ToString();
+                cStack.Add(new CourseStackNode(readDepartment, readNumberID));
             }
             reader.Close();
             }
 
+            nextNode = findNextNode(nextNode);
         }
 
         private string findNextNode(string node)
