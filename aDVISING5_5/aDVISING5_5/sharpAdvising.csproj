@@ -51,10 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
+    <Compile Include="CourseGraph.cs" />
     <Compile Include="CourseStack.cs" />
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GraphNode.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="PreReq.cs" />
     <Compile Include="PrerequisiteTree.cs">
