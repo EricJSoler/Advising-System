@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace sharpAdvising
+namespace sharpAdvising//We got a problem wiht naming a column external
 {
   
 

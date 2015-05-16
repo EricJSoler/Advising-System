@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Test_0506Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PrerequisiteTree">
+    <Key>
+      <PropertyRef Name="Department" />
+    </Key>
+    <Property Name="Department" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="BranchType" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="External" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NodeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="Test_0506Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PrerequisiteTrees" EntityType="Self.PrerequisiteTree" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+    <FunctionImport Name="read_by_dep_num" ReturnType="Collection(Test_0506Model.read_by_dep_num_Result)">
+      <Parameter Name="DepartmentID" Mode="In" Type="String" />
+      <Parameter Name="NumberID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="read_courseID_by_program_department" ReturnType="Collection(String)">
+      <Parameter Name="DepartmentID" Mode="In" Type="String" />
+      <Parameter Name="program" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="read_program_by_departmentID_programID" ReturnType="Collection(Test_0506Model.read_program_by_departmentID_programID_Result)">
+      <Parameter Name="DepartmentID" Mode="In" Type="String" />
+      <Parameter Name="programID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="read_subjects_by_program" ReturnType="Collection(String)">
+      <Parameter Name="programID" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="read_by_dep_num_Result">
+    <Property Type="String" Name="PreReqDepartmentID" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PreReqNumberID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Marker" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="read_program_by_departmentID_programID_Result">
+    <Property Type="String" Name="department" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="courseID" Nullable="true" MaxLength="10" />
+  </ComplexType>
+</Schema>

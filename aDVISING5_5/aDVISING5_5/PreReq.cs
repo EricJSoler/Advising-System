@@ -46,8 +46,12 @@ namespace sharpAdvising
             reader.Close();
 
             Console.WriteLine("we here");
+         
+            
         }
 
+
+        
         private bool subjectAlreadyAdded(string test)
         {
             foreach(Subject element in subjectRequirements)
@@ -58,8 +62,8 @@ namespace sharpAdvising
             return false;
         }
 
-
+     
       public static string program;
-      List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
+      public List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
     }
 }
