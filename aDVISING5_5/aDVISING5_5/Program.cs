@@ -29,6 +29,7 @@ namespace sharpAdvising
             //quarterOfEnrollment = Console.ReadLine();
             PreReq wow = new PreReq();
             TimeFilter test = new TimeFilter(3);
+            Console.WriteLine("sdf");
           
         }
 

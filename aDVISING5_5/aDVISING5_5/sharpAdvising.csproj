@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="Course.cs" />
     <Compile Include="CourseGraph.cs" />
-    <Compile Include="CourseStack.cs" />
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
@@ -73,7 +72,6 @@
     </Compile>
     <Compile Include="Section.cs" />
     <Compile Include="SQLHANDLER.cs" />
-    <Compile Include="CourseStackNode.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="Term.cs" />
     <Compile Include="TestModel.Context.cs">
