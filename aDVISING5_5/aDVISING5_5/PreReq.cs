@@ -45,7 +45,10 @@ namespace sharpAdvising
 
             reader.Close();
 
+            graph = new CourseGraph();
+            graph.addNode("CS", "233");
             Console.WriteLine("we here");
+            
          
             
         }
@@ -62,7 +65,7 @@ namespace sharpAdvising
             return false;
         }
 
-     
+        private CourseGraph graph;
       public static string program;
       public List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
     }
