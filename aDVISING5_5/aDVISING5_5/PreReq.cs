@@ -45,7 +45,18 @@ namespace sharpAdvising
 
             reader.Close();
 
-            Console.WriteLine("we here");
+            foreach(Subject element in subjectRequirements)
+            {
+                foreach(Course ele in element.coursesReq)
+                {
+                    Graph.insert(ele.departmentID, ele.numberID);
+                }
+            }
+
+            Console.WriteLine("Graph has been built");
+            
+            
+            
          
             
         }
@@ -62,7 +73,7 @@ namespace sharpAdvising
             return false;
         }
 
-     
+       
       public static string program;
       public List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
     }
