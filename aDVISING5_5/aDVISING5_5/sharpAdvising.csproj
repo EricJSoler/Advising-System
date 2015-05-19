@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
-    <Compile Include="CourseGraph.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="GraphNode.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="PreReq.cs" />
