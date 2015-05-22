@@ -22,9 +22,10 @@ namespace sharpAdvising//We got a problem wiht naming a column external
      public Course()
         { }
         
-        public Course(string numID, string dID)
+
+        public Course(string dID, string numID)
         {
-            ownedTerms = new List<Term>();
+            
             numberID = numID;
             departmentID = dID;
         }
@@ -37,7 +38,7 @@ namespace sharpAdvising//We got a problem wiht naming a column external
 
         public void readDataForCourseName()
         {
-
+            ownedTerms = new List<Term>();
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 

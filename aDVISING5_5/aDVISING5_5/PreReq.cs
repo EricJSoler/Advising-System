@@ -49,7 +49,7 @@ namespace sharpAdvising
             {
                 foreach(Course ele in element.coursesReq)
                 {
-                    Graph.insert(ele.departmentID, ele.numberID);
+                    //Graph.build(ele.departmentID, ele.numberID);
                 }
             }
 

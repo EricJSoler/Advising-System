@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
-using System.Xml.Serialization;//added 2/25
+using System.Xml.Serialization;
 using System.IO;
 
 namespace sharpAdvising
 {
     /// <summary>
     /// TODO: Update the time filter to deal with students not starting in quarter 0, If time allows should also be updated to include options to take x number of courses
+    /// The Time Filter Will receive a List<Course> qualifiedFor</Course> from the Pre-req filter this will consist of all the courses a student is currently qualified for 
+    /// The time filter will then filter which courses can be scheduled output these courses to a container then send a List<Course>couldNotBeCompleted</Course> representing courses that could not be scheduled and send that back to the Pre-Req filter
     /// </summary>
 
    
@@ -21,12 +23,12 @@ namespace sharpAdvising
 
         }
        
-        public TimeFilter(int numberOfClasses)///This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
+        public TimeFilter(int numberOfClasses)//This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
         {
-            List<Course> PotentialSchedule = new List<Course>();///TODO: this potentialSchedule should come from the Pre-Req filter maybeRename it as coursesQualified for
+            List<Course> PotentialSchedule = new List<Course>();//TODO: this potentialSchedule should come from the Pre-Req filter maybeRename it as coursesQualified for
 
 
-            for (int i = 0; i < numberOfClasses; i++)///TODO: this loop should be performed on the coursesQualifed for the comes from the PreReq Filter
+            for (int i = 0; i < numberOfClasses; i++)//TODO: this loop should be performed on the coursesQualifed for the comes from the PreReq Filter
             {
                 string numID;
                 string dID;
@@ -34,8 +36,8 @@ namespace sharpAdvising
                 dID = Console.ReadLine();
                 Console.WriteLine("input a num id");
                 numID = Console.ReadLine();
-                PotentialSchedule.Add((new Course(numID, dID)));
-                PotentialSchedule[i].readDataForCourseName();//TODO: Check this to make sure it still works right this was re-arranged to allow for Course Class to be used better
+                PotentialSchedule.Add((new Course(dID, numID)));
+                PotentialSchedule[i].readDataForCourseName();//TODO: Check this to make sure it still works right this was re-arranged to allow for Course Class to be used more frequently
                 Console.WriteLine("you done homie");
             }
             matches = new List<Match>();
@@ -59,7 +61,7 @@ namespace sharpAdvising
         }
 
 
-        private bool courseNotCompleted(string courseToBeTested, List<string> coursesTestedAgainst)///pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata
+        private bool courseNotCompleted(string courseToBeTested, List<string> coursesTestedAgainst)//pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata
         {
             int count = 0;
             foreach (string element in coursesTestedAgainst)
@@ -72,9 +74,9 @@ namespace sharpAdvising
             }
             return true;
         }
-        public List<Quarter> preReqsQualifiedfFor;
+        
         public List<Course> potentialSchedule;
-        public List<Match> matches; ///This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
+        public List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
 
         public void addMatches(Course recievedCourse, int termNum)
         {
@@ -110,7 +112,7 @@ namespace sharpAdvising
                         {
                             Console.WriteLine("These classes overlap");
 
-                            ///TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
+                            //TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
                             matches.RemoveAt(count);
                             return;
                         }

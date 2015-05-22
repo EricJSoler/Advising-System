@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Xml.Serialization;//added 2/25
+using System.Xml.Serialization;
 using System.IO;
 
 namespace sharpAdvising
@@ -42,8 +42,13 @@ namespace sharpAdvising
         }
 
 
-
+        /// <summary>
+        /// myConnection is the connection to the main database(The Pretty one that Steve is building)
+        /// </summary>
         public static SqlConnection myConnection;
+        /// <summary>
+        /// myConnection2 is the connection to the "sandbox" database that we are throwing non-finalized information into as we need it to build the rest of this processing system
+        /// </summary>
         public static SqlConnection myConnection2;
     }
 }

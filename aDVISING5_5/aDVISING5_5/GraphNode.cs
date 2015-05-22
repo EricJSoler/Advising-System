@@ -9,55 +9,44 @@ using System.IO;
 
 namespace sharpAdvising
 {
+    /// <summary>
+    /// Graph Node: Will be the nodes used in the Graph class list of allCourses. Relationships between GraphNodes will be represented by the adjacency matrix adj in the Graph class
+    /// /// </summary>
     public class GraphNode
     {
         public GraphNode()
+        { }
+
+       /// <summary>
+       /// This constructor will intake the departmnetID the numberID and what row in the adjacency matrix from the Graph class pre-requisite information for this Course will be stored
+       /// </summary>
+       /// <param name="depID"></param>
+       /// <param name="numID"></param>
+       /// <param name="rowValue"></param>
+        public GraphNode(string depID, string numID, int rowValue)
         {
+            departmentID = depID;
+            numberID = numID;
+            row = rowValue;
         }
-
-        public GraphNode(string department, string number, string nodeType)
-        {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-
-            cmd.CommandText = "dbo.Read_PreReqDep_PreReqN_Ext_GroupID_By_DepID_NumID";
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@DepID",department));
-            cmd.Parameters.Add(new SqlParameter("@NumID", number));
-            cmd.Connection = SQLHANDLER.myConnection2;
-
-            reader = cmd.ExecuteReader();
-            List<String> readDep = new List<String>();
-            List<String> readNum = new List<String>();
-            List<String> ext = new List<String>();
-            List<String> group = new List<String>();
-            while (reader.Read()) ///Pull in the table of pre-requisite for the course
-            {
-                readDep.Add(reader.GetValue(0).ToString());
-                readNum.Add(reader.GetValue(1).ToString());
-                ext.Add(reader.GetValue(2).ToString());
-                group.Add(reader.GetValue(3).ToString());
-            }
-
-            int i = 0;
-            foreach (String element in readDep)
-            {
-                Console.WriteLine(readDep[i]);
-                Console.WriteLine(readNum[i]);
-                Console.WriteLine(ext[i]);
-                Console.WriteLine(group[i]);
-                Console.WriteLine("------------");
-                i++;
-            }
-
-            reader.Close();
-        }
-
-
-        List<GraphNode> children;
-        int inDegree;
-        string department;
-        string number;
-        string nodeType;
+    
+        /// <summary>
+        /// Row will indicate which row in the adjacency matrix of the graph holds the pre-requisite information of this course 
+        /// </summary>
+        public int row;
+        /// <summary>
+        /// Complete will store a boolean value indicating whether the corresponding course has been recommended.
+        /// </summary>
+        public bool completed;
+        /// <summary>
+        /// departmentID will store which department the course belongs too
+        /// </summary>
+        public string departmentID;
+        /// <summary>
+        /// numberID will store which number corresponds to the given course
+        /// </summary>
+        public string numberID;
     }
+
+
 }

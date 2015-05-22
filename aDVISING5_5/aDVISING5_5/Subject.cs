@@ -39,7 +39,7 @@ namespace sharpAdvising
             while(reader.Read())
             {
                 readValue = reader.GetValue(0).ToString();
-                coursesReq.Add((new Course(readValue, department)));
+                coursesReq.Add((new Course(department, readValue)));
             }
             reader.Close();    
         }

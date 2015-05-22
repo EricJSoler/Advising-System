@@ -57,13 +57,11 @@
     <Compile Include="PreReq.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quarter.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="SQLHANDLER.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="Term.cs" />
     <Compile Include="TimeFilter.cs" />
-    <Compile Include="Times.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
