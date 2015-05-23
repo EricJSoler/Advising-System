@@ -11,42 +11,23 @@ namespace sharpAdvising
 {
     /// <summary>
     /// Graph Node: Will be the nodes used in the Graph class list of allCourses. Relationships between GraphNodes will be represented by the adjacency matrix adj in the Graph class
-    /// /// </summary>
-    public class GraphNode
+    /// </summary>
+    class GraphNode
     {
-        public GraphNode()
-        { }
-
-       /// <summary>
-       /// This constructor will intake the departmnetID the numberID and what row in the adjacency matrix from the Graph class pre-requisite information for this Course will be stored
-       /// </summary>
-       /// <param name="depID"></param>
-       /// <param name="numID"></param>
-       /// <param name="rowValue"></param>
-        public GraphNode(string depID, string numID, int rowValue)
+        /** Constructor
+         *  Initializes the graph node with the department ID and the number ID 
+         *  \param departmentID The department ID of the course.
+         *  \param numberID The number ID of the course.
+         */
+        public GraphNode(String departmentID, String numberID)
         {
-            departmentID = depID;
-            numberID = numID;
-            row = rowValue;
+            m_departmentID = departmentID;
+            m_numberID = numberID;
         }
-    
-        /// <summary>
-        /// Row will indicate which row in the adjacency matrix of the graph holds the pre-requisite information of this course 
-        /// </summary>
-        public int row;
-        /// <summary>
-        /// Complete will store a boolean value indicating whether the corresponding course has been recommended.
-        /// </summary>
-        public bool completed;
-        /// <summary>
-        /// departmentID will store which department the course belongs too
-        /// </summary>
-        public string departmentID;
-        /// <summary>
-        /// numberID will store which number corresponds to the given course
-        /// </summary>
-        public string numberID;
+
+        /// The department ID of the course
+        public String m_departmentID;
+        /// The number ID of the course
+        public String m_numberID;
     }
-
-
 }

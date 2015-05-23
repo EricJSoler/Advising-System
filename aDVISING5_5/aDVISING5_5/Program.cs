@@ -10,6 +10,8 @@ using System.IO;
 
 namespace sharpAdvising
 {
+    
+
     public class Program
     {
         static void Main(string[] args)
@@ -22,11 +24,14 @@ namespace sharpAdvising
             String recievedDegree;///TODO:For our final product recievedDegree and quarterOfEnrollment will be coming in most likely from a windows form application for now we will just input them into the console
             String quarterOfEnrollment;
 
+            Graph graph = new Graph();
+            List<PrereqRow> rows = graph.getCoursePrereq("MATH", "79");
+            graph.build(rows, 0);
 
            // recievedDegree = Console.ReadLine();
             //quarterOfEnrollment = Console.ReadLine();
             //PreReq wow = new PreReq();
-            TimeFilter test = new TimeFilter(3);
+            //TimeFilter test = new TimeFilter(3);
             Console.WriteLine("sdf");
           
         }
