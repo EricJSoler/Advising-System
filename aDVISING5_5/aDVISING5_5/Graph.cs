@@ -24,6 +24,21 @@ namespace sharpAdvising
         }
 
         /// <summary>
+        /// Inserts a Course Into the graph. This calls the functions for building the graph since it didnt make since to have to pass the parent index from main so it calls the addCourseToGrid() which returns which index information for this course will be stored
+        /// </summary>
+        /// <param name="dep"></param>
+        /// <param name="num"></param>
+        public void insertCourse(string dep, string num)
+        {
+            List<PrereqRow> row = this.getCoursePrereq(dep, num);
+            int courseRow = addCourseToGrid();
+            GraphNode temp = new GraphNode(dep, num);
+            temp.row = courseRow;
+            allCourses.Add(dep + num, temp);
+            this.build(row, courseRow);
+        }
+        
+        /// <summary>
         /// Checks if the depth is the correct size for all lists
         /// </summary>
         /// <param name="depth">The current depth to check against</param>
@@ -41,9 +56,9 @@ namespace sharpAdvising
         }
 
         /// <summary>
-        /// Adds a single course to the adjacency matrix
+        /// Adds a single course to the adjacency matrix and returns the integer value of what row information about this course will be stored in
         /// </summary>
-        public void addCourseToGrid()
+        private int addCourseToGrid()
         {
             courseGrid.Add(new List<List<bool>>());
             for (int i = 0; i < courseGrid.Count; i++) {
@@ -59,6 +74,7 @@ namespace sharpAdvising
                         courseGrid[i][j].Add(false);
                 }
             }
+            return (courseGrid.Count) - 1;
         }
 
         /// <summary>
@@ -66,77 +82,96 @@ namespace sharpAdvising
         /// </summary>
         /// <param name="prereqRows">List of required courses</param>
         /// <param name="parentIndex">0 for first (for recursion)</param>
-        public void build(List<PrereqRow> prereqRows, int parentIndex)
+        private void build(List<PrereqRow> prereqRows, int parentIndex)
         {
             int path = 0;
             String depth = "1";
-            foreach (PrereqRow row in prereqRows) {
+            foreach (PrereqRow row in prereqRows)
+            {
                 String courseName = "";
-                if (row.prereqDepartmentID == "MASTER") {
-                    courseName = row.departmentID + row.numberID;
-                    try {
-                        if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
-                            continue;
-                    }
-                    catch {
-                        // We didnt place above this course. continue on.
-                    }
-                }
-                else {
-                    courseName = row.prereqDepartmentID + row.prereqNumberID;
-                    try {
-                        if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
-                            continue;
-                    }
-                    catch {
-                        // We didnt place above this course. continue on.
-                    }
-                }
-
-                int index = 0;
-                // Add course if not a duplicate
-                try {
-                    allCourses.Add(courseName, new GraphNode(row.prereqDepartmentID, row.prereqNumberID));
-                    addCourseToGrid();
-                    index = allCourses.Count - 1;
-                }
-                catch (ArgumentException e) {
-                    //duplicate...
-                    for (int i = 0; i < allCourses.Count; i++) {
-                        if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID) {
-                            if (row.prereqDepartmentID == "MASTER")
-                                parentIndex = i;
-                            else
-                                index = i;
-
-                            break;
+                if (row.prereqDepartmentID != "MASTER")
+                {
+                    if (row.prereqDepartmentID == "MASTER")
+                    {
+                        courseName = row.departmentID + row.numberID;
+                        try
+                        {
+                            if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
+                                continue;
+                        }
+                        catch
+                        {
+                            // We didnt place above this course. continue on.
                         }
                     }
-                }
+                    else
+                    {
+                        courseName = row.prereqDepartmentID + row.prereqNumberID;
+                        try
+                        {
+                            if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
+                                continue;
+                        }
+                        catch
+                        {
+                            // We didnt place above this course. continue on.
+                        }
+                    }
 
-                if (row.prereqDepartmentID == "MASTER") {
-                    continue;
-                }
+                    int index = 0;
+                    // Add course if not a duplicate
+                    try
+                    {
+                        GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
+                        //allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, new GraphNode(row.prereqDepartmentID, row.prereqNumberID));
+                        allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
+                        int tempsRow = addCourseToGrid();
+                        temp.row = tempsRow;
+                        index = allCourses.Count - 1;
+                    }
+                    catch (ArgumentException e)
+                    {
+                        //duplicate...
+                        for (int i = 0; i < allCourses.Count; i++)
+                        {
+                            if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID)
+                            {
+                                if (row.prereqDepartmentID == "MASTER")
+                                    parentIndex = i;
+                                else
+                                    index = i;
 
-                List<PrereqRow> morePrereqs;
-                morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
-                build(morePrereqs, index);
-                checkDepth(path + 1);
-                if (row.type == "OR") {
-                    courseGrid[parentIndex][index][path++] = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (row.prereqDepartmentID == "MASTER")
+                    {
+                        continue;
+                    }
+
+                    List<PrereqRow> morePrereqs;
+                    morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
+                    build(morePrereqs, index);
                     checkDepth(path + 1);
-                }
-                else {
-                    if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
-                        row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
-                        path++;
+                    if (row.type == "OR")
+                    {
+                        courseGrid[parentIndex][index][path++] = true;
+                        checkDepth(path + 1);
+                    }
+                    else
+                    {
+                        if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
+                            row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
+                            path++;
 
-                    checkDepth(path + 1);
-                    courseGrid[parentIndex][index][path] = true;
+                        checkDepth(path + 1);
+                        courseGrid[parentIndex][index][path] = true;
+                    }
                 }
             }
         }
-
         /// <summary>
         /// Gets the list of courses required to take for the desired course
         /// </summary>
@@ -188,7 +223,25 @@ namespace sharpAdvising
         /// <param name="recommended"></param>
         public void updateCompleted(List<Course> recommended)
         {
+            foreach (Course element in recommended)
+            {
+                GraphNode temp;
+                String key = element.departmentID + element.numberID;
+                allCourses.TryGetValue(key, out temp);
+                int col = temp.row;
+                updateColumn(col);
+            }
+        }
 
+        private void updateColumn(int column)
+        {
+            for (int i = 0; i < courseGrid.Count; i++)
+            {
+                for (int j = 0; j < courseGrid[i][column].Count; j++)
+                {
+                    courseGrid[i][column][j] = false;
+                }
+            }
         }
 
         /// <summary>

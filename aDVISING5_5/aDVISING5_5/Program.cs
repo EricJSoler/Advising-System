@@ -24,12 +24,12 @@ namespace sharpAdvising
             String recievedDegree;///TODO:For our final product recievedDegree and quarterOfEnrollment will be coming in most likely from a windows form application for now we will just input them into the console
             String quarterOfEnrollment;
 
+            
+           // Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
+            //coursesPlacedInto.Add("ENGL", 101);
             Graph graph = new Graph();
-            List<PrereqRow> rows = graph.getCoursePrereq("CS", "110");
-            Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();
-            coursesPlacedInto.Add("ENGL", 101);
-            graph.coursesPlacedInto = coursesPlacedInto;
-            graph.build(rows, 0);
+            //graph.coursesPlacedInto = coursesPlacedInto;
+            graph.insertCourse("MATH","142");
 
            // recievedDegree = Console.ReadLine();
             //quarterOfEnrollment = Console.ReadLine();

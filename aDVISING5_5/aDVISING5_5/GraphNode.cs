@@ -29,5 +29,7 @@ namespace sharpAdvising
         public String m_departmentID;
         /// The number ID of the course
         public String m_numberID;
+
+       public int row;
     }
 }
