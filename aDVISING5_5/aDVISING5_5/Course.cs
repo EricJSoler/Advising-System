@@ -34,7 +34,7 @@ namespace sharpAdvising//We got a problem wiht naming a column external
         public string departmentID;
         public string numberID;
         public List<Term> ownedTerms;
-
+        public int importance;
 
         public void readDataForCourseName()
         {

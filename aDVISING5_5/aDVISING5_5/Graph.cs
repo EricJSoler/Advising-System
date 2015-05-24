@@ -10,7 +10,7 @@ namespace sharpAdvising
     /// <summary>
     /// Graph class will hold all the required courses in order to complete a degree in a dictionary. Relationships between courses will be represented by an adjacency matrix 
     /// </summary>
-    class Graph
+    public class Graph
     {
         /// <summary>
         /// Constructor
@@ -65,6 +65,8 @@ namespace sharpAdvising
             return (courseGrid.Count) - 1;
         }
 
+
+
         /// <summary>
         /// Builds the graph with the given list of required courses
         /// </summary>
@@ -79,35 +81,6 @@ namespace sharpAdvising
                // String courseName = "";
                 if (row.prereqDepartmentID != "MASTER" && (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && !(coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID) ) ) )
                 {
-                    //I dont think we need this check if the preReq is a MASTER why not just skip all this stuff? It seems to be working fine
-                    //if (row.prereqDepartmentID == "MASTER")
-                    //{
-                    //    courseName = row.departmentID + row.numberID;
-                    //    try
-                    //    {
-                    //        if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
-                    //            continue;
-                    //    }
-                    //    catch
-                    //    {
-                    //        // We didnt place above this course. continue on.
-                    //    }
-                    //}
-                   // else
-                    //{
-                        //this variable never gets used?
-                        //courseName = row.prereqDepartmentID + row.prereqNumberID;
-                        //try  //Im moving this check up to the top I think it applies to the same thing as having a course that is MASTER we can just skip it
-                        //{
-                        //    if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
-                        //        continue;
-                        //}
-                        //catch
-                        //{
-                        //    // We didnt place above this course. continue on.
-                        //}
-                    //}
-
                     int index = 0;
                     // Add course if not a duplicate
                     try
@@ -233,6 +206,24 @@ namespace sharpAdvising
             }
         }
 
+
+        public int occurenceCount(String dep, String num)
+        {
+            int count = 0;
+            GraphNode temp;
+            allCourses.TryGetValue(dep + num, out temp);
+            int location = temp.row;
+            for (int i = 0; i < courseGrid.Count;i++)
+            {
+                foreach (bool element in courseGrid[i][location])
+                {
+                    if (element == true)
+                        count++;
+                }
+            }
+                return count;
+        }
+
         /// <summary>
         /// allCourses is a dictionary of GraphNode using integers as keys. The integer key for each entry in the dictionary will represent what row in the adjacency matrix information about the course can be found
         /// </summary>
@@ -244,6 +235,7 @@ namespace sharpAdvising
         /// </summary>
         public List<List<List<bool>>> courseGrid;
         
+
         /// <summary>
         /// The depth of the entire grid (different paths)
         /// </summary>
@@ -255,7 +247,7 @@ namespace sharpAdvising
     /// <summary>
     /// The rows that the db tables return
     /// </summary>
-    class PrereqRow
+    public class PrereqRow
     {
         /// <summary>
         /// Represents the department of the MASTER course
