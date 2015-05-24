@@ -12,7 +12,7 @@ namespace sharpAdvising
     /// <summary>
     /// Graph Node: Will be the nodes used in the Graph class list of allCourses. Relationships between GraphNodes will be represented by the adjacency matrix adj in the Graph class
     /// </summary>
-    class GraphNode
+    public class GraphNode
     {
         /** Constructor
          *  Initializes the graph node with the department ID and the number ID 

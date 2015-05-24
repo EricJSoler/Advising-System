@@ -13,16 +13,16 @@ namespace sharpAdvising
     {
         public Subject()
         {
-            coursesReq = new List<Course>();
+            reqCourses = new Dictionary<string, Course>();
         }
         public Subject(string dept)
         {
-            coursesReq = new List<Course>();
+            reqCourses = new Dictionary<string, Course>();
             department = dept;
             addCourseRequirementsForDepartment();
         }
 
-     public void addCourseRequirementsForDepartment()
+        public void addCourseRequirementsForDepartment()
         {
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
@@ -32,20 +32,26 @@ namespace sharpAdvising
             cmd.Parameters.Add(new SqlParameter("@DepartmentID", department));
             cmd.Parameters.Add(new SqlParameter("@program", PreReq.program));
             cmd.Connection = SQLHANDLER.myConnection2;
-            
+
             reader = cmd.ExecuteReader();
 
             string readValue;
-            while(reader.Read())
+            while (reader.Read())
             {
                 readValue = reader.GetValue(0).ToString();
-                coursesReq.Add((new Course(department, readValue)));
+                try
+                {
+                    reqCourses.Add(department + readValue, new Course(department, readValue));
+                }
+                catch (ArgumentException e)
+                {
+                    //do nothing
+                }
             }
-            reader.Close();    
+            reader.Close();
         }
 
-        
-        public List<Course> coursesReq;
+        public Dictionary<String, Course> reqCourses;
         public string department;
     }
 }

@@ -18,7 +18,12 @@ namespace sharpAdvising
         public PreReq()
         {
             program = "AAS-MCAIMS";
-            subjectRequirements = new List<Subject>();
+            subjectRequirements = new Dictionary<string, Subject>();
+            courseGraph = new Graph();
+            Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
+            coursesPlacedInto.Add("MATH", 141);
+            coursesPlacedInto.Add("ENGL", 101);
+            courseGraph.coursesPlacedInto = coursesPlacedInto;
             findDepartments();
 
         }
@@ -30,51 +35,59 @@ namespace sharpAdvising
 
             cmd.CommandText = "dbo.read_subjects_by_program";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@programID",program));
+            cmd.Parameters.Add(new SqlParameter("@programID", program));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
                 string readValue = reader.GetValue(0).ToString();
-                if(!subjectAlreadyAdded(readValue))
+                try
                 {
-                    subjectRequirements.Add(new Subject(readValue));
+                    subjectRequirements.Add(readValue, new Subject(readValue));
+                }
+                catch (ArgumentException e)
+                {
+                    //Do Nothing wow science
                 }
             }
 
             reader.Close();
 
-            foreach(Subject element in subjectRequirements)
+            foreach (Subject element in subjectRequirements.Values)
             {
-                foreach(Course ele in element.coursesReq)
+                foreach (Course ele in element.reqCourses.Values)
                 {
-                    //Graph.build(ele.departmentID, ele.numberID);
+                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
                 }
             }
-
             Console.WriteLine("Graph has been built");
-            
-            
-            
-         
-            
         }
 
-
-        
-        private bool subjectAlreadyAdded(string test)
+        public int getImportanceRating(string dep, string num)
         {
-            foreach(Subject element in subjectRequirements)
+            int importance = 0;
+            Subject temp;
+            subjectRequirements.TryGetValue(dep, out temp);
+            Course tempC;
+            if (temp.reqCourses.TryGetValue(dep + num, out tempC))
+                importance += 10;
+            importance += courseGraph.occurenceCount(dep, num);
+            switch (dep)
             {
-                if (element.department == test)
-                    return true;
+                case "MATH":
+                    importance += 55;
+                    break;
+                case "PHYS":
+                    importance += 20;
+                    break;
             }
-            return false;
+            return importance;
         }
 
-       
-      public static string program;
-      public List<Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
+
+        public static string program;
+        public Dictionary<string, Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
+        public Graph courseGraph;
     }
 }
