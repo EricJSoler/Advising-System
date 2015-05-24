@@ -42,17 +42,12 @@ namespace sharpAdvising
         /// Checks if the depth is the correct size for all lists
         /// </summary>
         /// <param name="depth">The current depth to check against</param>
-        public void checkDepth(int depth)
+        public void checkDepth(int parentCourse, int prereqCourse, int depth)
         {
-            if (gridDepth < depth) {
-                gridDepth = depth;
-                for (int i = 0; i < courseGrid.Count; i++) {
-                    for (int j = 0; j < courseGrid[i].Count; j++) {
-                        while (courseGrid[i][j].Count < gridDepth)
-                            courseGrid[i][j].Add(false);
-                    }
-                }
-            }
+            while (courseGrid[parentCourse][prereqCourse].Count <= depth)
+                courseGrid[parentCourse][prereqCourse].Add(false);
+
+            courseGrid[parentCourse][prereqCourse][depth] = true;
         }
 
         /// <summary>
@@ -61,18 +56,11 @@ namespace sharpAdvising
         private int addCourseToGrid()
         {
             courseGrid.Add(new List<List<bool>>());
-            for (int i = 0; i < courseGrid.Count; i++) {
+            for (int i = 0; i < courseGrid.Count; i++)
+            {
                 courseGrid[i].Add(new List<bool>());
                 if (courseGrid.Count > 1 && i > 0)
                     courseGrid[courseGrid.Count - 1].Add(new List<bool>());
-            }
-
-
-            for (int i = 0; i < courseGrid.Count; i++) {
-                for (int j = 0; j < courseGrid[i].Count; j++) {
-                    while (courseGrid[i][j].Count < gridDepth)
-                        courseGrid[i][j].Add(false);
-                }
             }
             return (courseGrid.Count) - 1;
         }
@@ -87,36 +75,38 @@ namespace sharpAdvising
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows)
-            {
-                String courseName = "";
-                if (row.prereqDepartmentID != "MASTER")
+            {  // This variable never Gets used?
+               // String courseName = "";
+                if (row.prereqDepartmentID != "MASTER" && (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && !(coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID) ) ) )
                 {
-                    if (row.prereqDepartmentID == "MASTER")
-                    {
-                        courseName = row.departmentID + row.numberID;
-                        try
-                        {
-                            if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
-                                continue;
-                        }
-                        catch
-                        {
-                            // We didnt place above this course. continue on.
-                        }
-                    }
-                    else
-                    {
-                        courseName = row.prereqDepartmentID + row.prereqNumberID;
-                        try
-                        {
-                            if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
-                                continue;
-                        }
-                        catch
-                        {
-                            // We didnt place above this course. continue on.
-                        }
-                    }
+                    //I dont think we need this check if the preReq is a MASTER why not just skip all this stuff? It seems to be working fine
+                    //if (row.prereqDepartmentID == "MASTER")
+                    //{
+                    //    courseName = row.departmentID + row.numberID;
+                    //    try
+                    //    {
+                    //        if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
+                    //            continue;
+                    //    }
+                    //    catch
+                    //    {
+                    //        // We didnt place above this course. continue on.
+                    //    }
+                    //}
+                   // else
+                    //{
+                        //this variable never gets used?
+                        //courseName = row.prereqDepartmentID + row.prereqNumberID;
+                        //try  //Im moving this check up to the top I think it applies to the same thing as having a course that is MASTER we can just skip it
+                        //{
+                        //    if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
+                        //        continue;
+                        //}
+                        //catch
+                        //{
+                        //    // We didnt place above this course. continue on.
+                        //}
+                    //}
 
                     int index = 0;
                     // Add course if not a duplicate
@@ -154,20 +144,19 @@ namespace sharpAdvising
                     List<PrereqRow> morePrereqs;
                     morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
                     build(morePrereqs, index);
-                    checkDepth(path + 1);
+                    //checkDepth(path + 1);
                     if (row.type == "OR")
                     {
-                        courseGrid[parentIndex][index][path++] = true;
-                        checkDepth(path + 1);
+                      //  courseGrid[parentIndex][index][path++] = true;
+                        //checkDepth(path + 1);
+                        checkDepth(parentIndex, index, path++);
                     }
                     else
                     {
                         if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
                             row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
                             path++;
-
-                        checkDepth(path + 1);
-                        courseGrid[parentIndex][index][path] = true;
+                        checkDepth(parentIndex, index, path);
                     }
                 }
             }

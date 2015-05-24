@@ -25,11 +25,12 @@ namespace sharpAdvising
             String quarterOfEnrollment;
 
             
-           // Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
-            //coursesPlacedInto.Add("ENGL", 101);
+            Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
+            coursesPlacedInto.Add("MATH", 141);
+            coursesPlacedInto.Add("ENGL", 101);
             Graph graph = new Graph();
-            //graph.coursesPlacedInto = coursesPlacedInto;
-            graph.insertCourse("MATH","142");
+            graph.coursesPlacedInto = coursesPlacedInto;
+            graph.insertCourse("MATH","163");
 
            // recievedDegree = Console.ReadLine();
             //quarterOfEnrollment = Console.ReadLine();
