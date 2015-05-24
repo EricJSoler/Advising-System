@@ -61,7 +61,7 @@ namespace sharpAdvising
         }
 
         /// <summary>
-        /// Builds the graph with the griven list of required courses
+        /// Builds the graph with the given list of required courses
         /// </summary>
         /// <param name="prereqRows">List of required courses</param>
         /// <param name="parentIndex">0 for first (for recursion)</param>
@@ -70,13 +70,16 @@ namespace sharpAdvising
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows) {
+                String courseName = "";
                 if (row.prereqDepartmentID == "MASTER")
-                    continue;
+                    courseName = row.departmentID + row.numberID;
+                else
+                    courseName = row.prereqDepartmentID + row.prereqNumberID;
 
                 int index = 0;
                 // Add course if not a duplicate
                 try {
-                    allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, new GraphNode(row.prereqDepartmentID, row.prereqNumberID));
+                    allCourses.Add(courseName, new GraphNode(row.prereqDepartmentID, row.prereqNumberID));
                     addCourseToGrid();
                     index = allCourses.Count - 1;
                 }
@@ -84,11 +87,17 @@ namespace sharpAdvising
                     //duplicate...
                     for (int i = 0; i < allCourses.Count; i++) {
                         if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID) {
-                            index = i;
+                            if (row.prereqDepartmentID == "MASTER")
+                                parentIndex = i;
+                            else
+                                index = i;
+
                             break;
                         }
                     }
                 }
+                if (row.prereqDepartmentID == "MASTER")
+                    continue;
 
                 List<PrereqRow> morePrereqs;
                 morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
@@ -106,31 +115,6 @@ namespace sharpAdvising
                     checkDepth(path + 1);
                     courseGrid[parentIndex][index][path] = true;
                 }
-
-                //if (row.type == "OR") {
-                //    if (depth.Length < row.groupID.Length) {
-                //        //new or level
-                //        depth = row.groupID;
-                //        courseGrid[parentIndex][index][path] = true;
-                //        checkDepth(++path);
-                //    }
-                //    else if (depth.Length == row.groupID.Length) {
-                //        if (depth == row.groupID) {
-                //            depth = row.groupID;
-                //            courseGrid[parentIndex][index][path] = true;
-                //            checkDepth(++path);
-                //        }
-                //    }
-                //    else if (depth.Length > row.groupID.Length) {
-                //        path = row.groupID.Split('.').Count() - 1;
-                //        depth = row.groupID;
-                //        courseGrid[parentIndex][index][path] = true;
-                //    }
-                //}
-                //else if (row.type == "AND") {
-                //    depth = row.groupID;
-                //    courseGrid[parentIndex][index][path] = true;
-                //}
             }
         }
 
@@ -189,7 +173,7 @@ namespace sharpAdvising
         }
 
         /// <summary>
-        /// allCourses is a dictionary of GraphNode using integers as keys. The integer key for each entry in the dictionary will represent what row in the ajacency matrix information about the course can be found
+        /// allCourses is a dictionary of GraphNode using integers as keys. The integer key for each entry in the dictionary will represent what row in the adjacency matrix information about the course can be found
         /// </summary>
         public Dictionary<String, GraphNode> allCourses;
 
