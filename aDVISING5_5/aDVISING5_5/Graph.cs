@@ -77,16 +77,13 @@ namespace sharpAdvising
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows)
-            {  // This variable never Gets used?
-               // String courseName = "";
+            { 
                 if (row.prereqDepartmentID != "MASTER" && (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && !(coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID) ) ) )
                 {
                     int index = 0;
-                    // Add course if not a duplicate
                     try
                     {
                         GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
-                        //allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, new GraphNode(row.prereqDepartmentID, row.prereqNumberID));
                         allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
                         int tempsRow = addCourseToGrid();
                         temp.row = tempsRow;
@@ -94,7 +91,6 @@ namespace sharpAdvising
                     }
                     catch (ArgumentException e)
                     {
-                        //duplicate...
                         for (int i = 0; i < allCourses.Count; i++)
                         {
                             if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID)
@@ -117,11 +113,9 @@ namespace sharpAdvising
                     List<PrereqRow> morePrereqs;
                     morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
                     build(morePrereqs, index);
-                    //checkDepth(path + 1);
+                   
                     if (row.type == "OR")
                     {
-                      //  courseGrid[parentIndex][index][path++] = true;
-                        //checkDepth(path + 1);
                         checkDepth(parentIndex, index, path++);
                     }
                     else
