@@ -19,6 +19,7 @@ namespace sharpAdvising
         {
             allCourses = new Dictionary<String, GraphNode>();
             courseGrid = new List<List<List<bool>>>();
+            coursesPlacedInto = new Dictionary<String, int>();
             gridDepth = 1;
         }
 
@@ -71,10 +72,26 @@ namespace sharpAdvising
             String depth = "1";
             foreach (PrereqRow row in prereqRows) {
                 String courseName = "";
-                if (row.prereqDepartmentID == "MASTER")
+                if (row.prereqDepartmentID == "MASTER") {
                     courseName = row.departmentID + row.numberID;
-                else
+                    try {
+                        if (coursesPlacedInto[row.departmentID] >= Convert.ToInt32(row.numberID))
+                            continue;
+                    }
+                    catch {
+                        // We didnt place above this course. continue on.
+                    }
+                }
+                else {
                     courseName = row.prereqDepartmentID + row.prereqNumberID;
+                    try {
+                        if (coursesPlacedInto[row.prereqDepartmentID] >= Convert.ToInt32(row.prereqNumberID))
+                            continue;
+                    }
+                    catch {
+                        // We didnt place above this course. continue on.
+                    }
+                }
 
                 int index = 0;
                 // Add course if not a duplicate
@@ -96,8 +113,10 @@ namespace sharpAdvising
                         }
                     }
                 }
-                if (row.prereqDepartmentID == "MASTER")
+
+                if (row.prereqDepartmentID == "MASTER") {
                     continue;
+                }
 
                 List<PrereqRow> morePrereqs;
                 morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
@@ -182,8 +201,15 @@ namespace sharpAdvising
         /// i.e. [Course][Pre-Reqs][Combinations] 
         /// </summary>
         public List<List<List<bool>>> courseGrid;
+        
+        /// <summary>
+        /// The depth of the entire grid (different paths)
+        /// </summary>
         public int gridDepth;
+
+        public Dictionary<String, int> coursesPlacedInto;
     }
+
     /// <summary>
     /// The rows that the db tables return
     /// </summary>

@@ -25,7 +25,10 @@ namespace sharpAdvising
             String quarterOfEnrollment;
 
             Graph graph = new Graph();
-            List<PrereqRow> rows = graph.getCoursePrereq("MATH", "79");
+            List<PrereqRow> rows = graph.getCoursePrereq("CS", "110");
+            Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();
+            coursesPlacedInto.Add("ENGL", 101);
+            graph.coursesPlacedInto = coursesPlacedInto;
             graph.build(rows, 0);
 
            // recievedDegree = Console.ReadLine();
