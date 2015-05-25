@@ -31,11 +31,18 @@ namespace sharpAdvising
         public void insertCourse(string dep, string num)
         {
             List<PrereqRow> row = this.getCoursePrereq(dep, num);
-            int courseRow = addCourseToGrid();
-            GraphNode temp = new GraphNode(dep, num);
-            temp.row = courseRow;
-            allCourses.Add(dep + num, temp);
-            this.build(row, courseRow);
+            try
+            {
+                GraphNode temp = new GraphNode(dep, num);
+                allCourses.Add(dep + num, temp);
+                int courseRow = addCourseToGrid();
+                temp.row = courseRow;
+                this.build(row, courseRow);
+            }
+            catch(ArgumentException e)
+            {
+                //Already have it do nothing brah
+            }
         }
         
         /// <summary>
@@ -78,53 +85,73 @@ namespace sharpAdvising
             String depth = "1";
             foreach (PrereqRow row in prereqRows)
             { 
-                if (row.prereqDepartmentID != "MASTER" && (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && !(coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID) ) ) )
+                if (row.prereqDepartmentID != "MASTER" && ( !(coursesPlacedInto.ContainsKey(row.prereqDepartmentID)) || (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && !(coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID) ) ) ))
                 {
-                    int index = 0;
-                    try
-                    {
-                        GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
-                        allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
-                        int tempsRow = addCourseToGrid();
-                        temp.row = tempsRow;
-                        index = allCourses.Count - 1;
-                    }
-                    catch (ArgumentException e)
-                    {
-                        for (int i = 0; i < allCourses.Count; i++)
-                        {
-                            if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID)
-                            {
-                                if (row.prereqDepartmentID == "MASTER")
-                                    parentIndex = i;
-                                else
-                                    index = i;
+                    bool alreadyQualifiedFor = false;
+                    if (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))
+                    { alreadyQualifiedFor = true; }
+                    //    try
+                    //    {
+                    //        GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
+                    //        allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
+                    //        int tempsRow = addCourseToGrid();
+                    //        temp.row = tempsRow;
 
-                                break;
+                    //    }
+                    //    catch (ArgumentException e)
+                    //    {
+                    //        //do nothing weee
+                    //    }
+                    //}
+                    //else
+                   // {
+                        int index = 0;
+                        try
+                        {
+                            GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
+                            allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
+                            int tempsRow = addCourseToGrid();
+                            temp.row = tempsRow;
+                            index = allCourses.Count - 1;
+                        }
+                        catch (ArgumentException e)
+                        {
+                            for (int i = 0; i < allCourses.Count; i++)
+                            {
+                                if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID)
+                                {
+                                    if (row.prereqDepartmentID == "MASTER")
+                                        parentIndex = i;
+                                    else
+                                        index = i;
+
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if (row.prereqDepartmentID == "MASTER")
-                    {
-                        continue;
-                    }
-
-                    List<PrereqRow> morePrereqs;
-                    morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
-                    build(morePrereqs, index);
-                   
-                    if (row.type == "OR")
-                    {
-                        checkDepth(parentIndex, index, path++);
-                    }
-                    else
-                    {
-                        if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
-                            row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
-                            path++;
-                        checkDepth(parentIndex, index, path);
-                    }
+                        if (row.prereqDepartmentID == "MASTER")
+                        {
+                            continue;
+                        }
+                        if (!alreadyQualifiedFor)
+                        {
+                            List<PrereqRow> morePrereqs;
+                            morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
+                            build(morePrereqs, index);
+                        }
+                        if (row.type == "OR")
+                        {
+                            checkDepth(parentIndex, index, path++);
+                        }
+                        else
+                        {
+                            if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
+                                row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
+                                path++;
+                            checkDepth(parentIndex, index, path);
+                        }
+                    //}
                 }
             }
         }
@@ -169,8 +196,35 @@ namespace sharpAdvising
         public List<Course> findQualifiedCourses()
         {
             List<Course> qualified = new List<Course>();
+            //check each row
+            for (int i = 0; i < courseGrid.Count; i++ )
+            {
+                
+                int count = 0;
+                //
+                for(int j = 0; j < courseGrid[i].Count;j++)
+                {
+                   
+                    for(int k = 0; k <courseGrid[i][j].Count; k++)
+                    {
+                            if (courseGrid[i][j][k] == true)
+                            {
+                                count++;
+                                break;
+                            }
+                    }
+                }
+                if (count == 0)
+                {
+                    foreach (GraphNode element in allCourses.Values)
+                    {
+                        if (element.row == i)
+                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                    }
+                }
+            }
 
-            return qualified;
+                return qualified;
         }
 
         /// <summary>

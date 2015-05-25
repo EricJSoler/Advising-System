@@ -19,7 +19,11 @@ namespace sharpAdvising
 
             SQLHANDLER.start();
             PreReq wow = new PreReq();
-            TimeFilter test = new TimeFilter(3);
+            for (int i = 0; i < 3; i++)
+            {
+                List<Course> qualifications = wow.getQualifiedCourses();
+                TimeFilter test = new TimeFilter(3);
+            }
             Console.WriteLine("sdf");
           
         }

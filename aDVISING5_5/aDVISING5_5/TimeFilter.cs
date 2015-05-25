@@ -22,6 +22,15 @@ namespace sharpAdvising
         {
 
         }
+        public TimeFilter(List<Course> qualifications, int numberOfClasses)
+        {
+            foreach(Course element in qualifications)
+            {
+                element.readDataForCourseName();
+            }
+
+
+        }
        
         public TimeFilter(int numberOfClasses)//This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
         {
@@ -78,7 +87,7 @@ namespace sharpAdvising
         public List<Course> potentialSchedule;
         public List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
 
-        public void addMatches(Course recievedCourse, int termNum)
+        public bool addMatches(Course recievedCourse, int termNum)
         {
             int count = (matches.Count());
             matches.Add(new Match());
@@ -88,7 +97,7 @@ namespace sharpAdvising
             {
                 foreach (Section ele in recievedCourse.ownedTerms[termNum].ownedSections)
                     matches[0].sectionOptions.Add(new Section(ele.sectionID));
-                return;
+                return true;
             }
 
             bool matchHasPriority = false;
@@ -114,7 +123,7 @@ namespace sharpAdvising
 
                             //TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
                             matches.RemoveAt(count);
-                            return;
+                            return false;
                         }
                         else if (matchHasPriority && recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID)
                         {
