@@ -14,150 +14,130 @@ namespace sharpAdvising
     /// The time filter will then filter which courses can be scheduled output these courses to a container then send a List<Course>couldNotBeCompleted</Course> representing courses that could not be scheduled and send that back to the Pre-Req filter
     /// </summary>
 
-   
+
     public class TimeFilter
     {
 
         public TimeFilter()
         {
-
-        }
-        public TimeFilter(List<Course> qualifications, int numberOfClasses)
-        {
-            foreach(Course element in qualifications)
-            {
-                element.readDataForCourseName();
-            }
-
-
-        }
-       
-        public TimeFilter(int numberOfClasses)//This will establish a schedule based on the number of classes you wish to take Assuming the student is starting in "quarter 0"
-        {
-            List<Course> PotentialSchedule = new List<Course>();//TODO: this potentialSchedule should come from the Pre-Req filter maybeRename it as coursesQualified for
-
-
-            for (int i = 0; i < numberOfClasses; i++)//TODO: this loop should be performed on the coursesQualifed for the comes from the PreReq Filter
-            {
-                string numID;
-                string dID;
-                Console.WriteLine("input d id");
-                dID = Console.ReadLine();
-                Console.WriteLine("input a num id");
-                numID = Console.ReadLine();
-                PotentialSchedule.Add((new Course(dID, numID)));
-                PotentialSchedule[i].readDataForCourseName();//TODO: Check this to make sure it still works right this was re-arranged to allow for Course Class to be used more frequently
-                Console.WriteLine("you done homie");
-            }
             matches = new List<Match>();
+        }
 
-            foreach (Course element in PotentialSchedule)
+        public List<Match> buildMyScheduleFor(List<Course> qualifications, string term, int numberOfCourses)
+        {
+
+            for (int i = 0, k = 0; i < numberOfCourses && k < qualifications.Count; i++, k++)
             {
-                addMatches(element,0);
-                //If we were allowed to schedule the course remove it     
+                qualifications[k].readDataForCourseName();
+                if (!addMatches(qualifications[k], term))
+                    i--;
             }
-            Console.WriteLine("here is where I stopped");
+                return this.matches;
         }
-
-
         
-
-
-        public int whichQuarter()
+        private bool addMatches(Course recievedCourse, string termID)
         {
-            int x = 0;
-            return (x++);
-        }
-
-
-        private bool courseNotCompleted(string courseToBeTested, List<string> coursesTestedAgainst)//pass in the coursethat is to be tested and the List of courses completed Right now the 2nd parameter is a list of string but itl probably be an xml file name lata
-        {
-            int count = 0;
-            foreach (string element in coursesTestedAgainst)
+            List<Match> updated = new List<Match>();
+            
+            //Create a new match to add to the matches then start removing overlapping sections
+            Match addedMatch = new Match(recievedCourse.departmentID, recievedCourse.numberID);
+            addedMatch.importance = recievedCourse.importance;
+            //Copy over section information for the specific term to the newly addedMatch
+            foreach (Term term in recievedCourse.ownedTerms)
             {
-                if (courseToBeTested == element)
+                if (term.termID == termID)
                 {
-                    count++;
-                    return false;
+                    foreach (Section sect in term.ownedSections)
+                    {
+                        addedMatch.sectionOptions.Add(new Section(sect));
+                    }
                 }
             }
-            return true;
-        }
-        
-        public List<Course> potentialSchedule;
-        public List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
-
-        public bool addMatches(Course recievedCourse, int termNum)
-        {
-            int count = (matches.Count());
-            matches.Add(new Match());
-            matches[count].departmentID = recievedCourse.departmentID;
-            matches[count].numberID = recievedCourse.numberID;
-            if (count == 0)
+            //If there isn't anything in matches yet we know the course we can try to add the new match without comparing anything
+            if (matches.Count == 0 && addedMatch.sectionOptions.Count > 0)//Check to make sure there are some section options in the addedMatch
             {
-                foreach (Section ele in recievedCourse.ownedTerms[termNum].ownedSections)
-                    matches[0].sectionOptions.Add(new Section(ele.sectionID));
+                matches.Add(addedMatch);
                 return true;
             }
-
+            if (addedMatch.sectionOptions.Count == 0)//If there aren't any sections in the addedMatch we can return false
+            {
+                return false;
+            }
+           
+            matches.Add(addedMatch);
+            //
             bool matchHasPriority = false;
             bool courseHasPriority = false;
-
-            int matchCounter = 0;
-            for (int i = 0; i < (matches.Count() - 1); i++ )
+            for (int i = 0; i < matches.Count; i++) //Match element in matches)
             {
-                for (int j = 0; j < (matches[i].sectionOptions.Count()); j++ )
+                if(matches[i].departmentID == addedMatch.departmentID && matches[i].numberID == addedMatch.numberID)
                 {
-                    for (int k = 0; k < (recievedCourse.ownedTerms[termNum].ownedSections.Count());k++ )//replace this 0 with an integer that depends on the quarter you are filling
-                    {
-
-                        int sizeOfSectionForMatch = matches[i].sectionOptions.Count();
-                        int sizeOfComparedCourse = recievedCourse.ownedTerms[termNum].ownedSections.Count();//Replace this 0 with the quarter you are looking for
+                    break;
+                }
+                for (int j = 0; j < matches[i].sectionOptions.Count;j++)// (Section sect in element.sectionOptions)//(int j = 0; j < element.sectionOptions.Count; j++)
+                {
+                    for (int k = 0; k < addedMatch.sectionOptions.Count ;k++)//each (Section addedSect in addedMatch.sectionOptions)
+                    {   //If a course only has one option give it priority
+                        int sizeOfSectionForMatch = matches[i].sectionOptions.Count;
+                        int sizeOfComparedCourse = addedMatch.sectionOptions.Count;
                         if (sizeOfSectionForMatch == 1)
                             matchHasPriority = true;
                         if (sizeOfComparedCourse == 1)
                             courseHasPriority = true;
-                        if (recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority && matchHasPriority)//FIX THIS
+                        if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority && matchHasPriority)//If both compared values have priority and overlap
                         {
-                            Console.WriteLine("These classes overlap");
-
-                            //TODO: NEED A FUNCTION TYPE THING HERE THAT RANKS THE IMPORTANCE OF THE CLASSES FOR NOW IM JUST GONNA REMOVE THE CURRENT COURSE
-                            matches.RemoveAt(count);
-                            return false;
+                            //These classes overlap and a decision needs to be made of which one to drop
+                            if (matches[i].importance < addedMatch.importance)
+                            {
+                                matches[i].sectionOptions.RemoveAt(j);
+                            }
+                            else
+                            {
+                                addedMatch.sectionOptions.RemoveAt(k);
+                            }
                         }
-                        else if (matchHasPriority && recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID)
+                        else if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && matchHasPriority)//if match has priority
                         {
-                            //DO NOTHING This is here to avoid that last else from being executed theres probably a better way to do this but serves its purpose
+                            addedMatch.sectionOptions.RemoveAt(k);
                         }
-                        else if (recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID && !matchHasPriority)
+                        else if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority)
                         {
-                            matches[matchCounter].sectionOptions.RemoveAt(j);
-                            matches[count].sectionOptions.Add(new Section(recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID));
-                        }
-                        else if (recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID == matches[i].sectionOptions[j].sectionID)
-                        {
+                            //Maybe put in an if that checks for a range of difference in importance
                             matches[i].sectionOptions.RemoveAt(j);
                         }
-                        else
-                            matches[count].sectionOptions.Add(new Section(recievedCourse.ownedTerms[termNum].ownedSections[k].sectionID));
+                        else if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID)
+                        {
+                            if (matches[i].importance < addedMatch.importance)
+                            {
+                                matches[i].sectionOptions.RemoveAt(j);
+                            }
+                            else
+                            {
+                                addedMatch.sectionOptions.RemoveAt(k);
+                            }
+                        }
+
                     }
                 }
             }
-        }
 
-        public bool hasCourseAlreadyBeenRecomended(Course course)
-        {
-            foreach (Match element in matches)
+            //Clean up the matches
+            for (int i = 0; i < matches.Count; i++ )
             {
-                if (course.departmentID == element.departmentID && course.numberID == element.numberID)
+                if (matches[i].sectionOptions.Count == 0)
+                    matches.RemoveAt(i);
+            }
+                if (addedMatch.sectionOptions.Count > 0)
                 {
+
                     return true;
                 }
-
-            }
-            return false;
+                else
+                    return false;
         }
 
+
+        private List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
     }
 
 

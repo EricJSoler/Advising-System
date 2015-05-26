@@ -218,7 +218,7 @@ namespace sharpAdvising
                 {
                     foreach (GraphNode element in allCourses.Values)
                     {
-                        if (element.row == i)
+                        if (element.row == i && !element.completed)
                             qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                     }
                 }
@@ -239,6 +239,7 @@ namespace sharpAdvising
                 String key = element.departmentID + element.numberID;
                 allCourses.TryGetValue(key, out temp);
                 int col = temp.row;
+                temp.completed = true;
                 updateColumn(col);
             }
         }

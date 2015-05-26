@@ -10,7 +10,7 @@ using System.IO;
 
 namespace sharpAdvising
 {
-    
+
 
     public class Program
     {
@@ -18,15 +18,25 @@ namespace sharpAdvising
         {
 
             SQLHANDLER.start();
-            PreReq wow = new PreReq();
+            PreReq pre = new PreReq();
+
+            string x;
+            do
+            {
+                TimeFilter time = new TimeFilter();
+               List<Match> recomended = time.buildMyScheduleFor(pre.getQualifiedCourses(), "Fall", 3);
+               pre.updateCompleted(recomended);
+                x = Console.ReadLine();
+            } while (x != "end");
             for (int i = 0; i < 3; i++)
             {
-                List<Course> qualifications = wow.getQualifiedCourses();
-                TimeFilter test = new TimeFilter(3);
+
+
             }
             Console.WriteLine("sdf");
-          
+
         }
     }
 }
 
+//TODO:: Update the time filter to let any on-line class be recommended

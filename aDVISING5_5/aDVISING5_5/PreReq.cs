@@ -29,6 +29,16 @@ namespace sharpAdvising
 
         }
 
+        public void updateCompleted(List<Match> completed)
+        {
+            List<Course> toBeUpdated = new List<Course>();
+            foreach (Match element in completed)
+            {
+                toBeUpdated.Add(new Course(element.departmentID, element.numberID));
+                courseGraph.updateCompleted(toBeUpdated);
+            }
+        }
+
         private void findDepartments()
         {
             SqlCommand cmd = new SqlCommand();
@@ -55,19 +65,19 @@ namespace sharpAdvising
 
             reader.Close();
 
-            //foreach (Subject element in subjectRequirements.Values)
-            //{
-            //    foreach (Course ele in element.reqCourses.Values)
-            //    {
-            //        courseGraph.insertCourse(ele.departmentID, ele.numberID);
-            //    }
-            //}
+            foreach (Subject element in subjectRequirements.Values)
+            {
+                foreach (Course ele in element.reqCourses.Values)
+                {
+                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
+                }
+            }
 
             //test values
-            courseGraph.insertCourse("MATH", "163");
-            courseGraph.insertCourse("PHYS", "243");
-            courseGraph.insertCourse("CS", "132");
-            courseGraph.insertCourse("CS", "131");
+            //courseGraph.insertCourse("MATH", "163");
+            //courseGraph.insertCourse("PHYS", "243");
+            //courseGraph.insertCourse("CS", "132");
+            //courseGraph.insertCourse("CS", "131");
             Console.WriteLine("Graph has been built");
 
 
