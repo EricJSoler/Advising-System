@@ -16,9 +16,26 @@ namespace sharpAdvising
             sectionOptions = new List<Section>();
         }
 
+        public Match(string dep, string num)
+        {
+            departmentID = dep;
+            numberID = num;
+            sectionOptions = new List<Section>();
+        }
+        public Match(Match a)
+        {
+            sectionOptions = new List<Section>();
+            departmentID = a.departmentID;
+            numberID = a.numberID;
+            importance = a.importance;
+
+            
+        }
+
      public string departmentID;
      public string numberID;
      public List<Section> sectionOptions;
+     public int importance;
        
     }
 }

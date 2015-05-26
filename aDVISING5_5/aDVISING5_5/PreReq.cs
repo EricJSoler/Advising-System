@@ -22,10 +22,21 @@ namespace sharpAdvising
             courseGraph = new Graph();
             Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
             coursesPlacedInto.Add("MATH", 141);
-            coursesPlacedInto.Add("ENGL", 101);
+            coursesPlacedInto.Add("ENGL", 98);
+            coursesPlacedInto.Add("CS", 131);
             courseGraph.coursesPlacedInto = coursesPlacedInto;
             findDepartments();
 
+        }
+
+        public void updateCompleted(List<Match> completed)
+        {
+            List<Course> toBeUpdated = new List<Course>();
+            foreach (Match element in completed)
+            {
+                toBeUpdated.Add(new Course(element.departmentID, element.numberID));
+                courseGraph.updateCompleted(toBeUpdated);
+            }
         }
 
         private void findDepartments()
@@ -61,19 +72,46 @@ namespace sharpAdvising
                     courseGraph.insertCourse(ele.departmentID, ele.numberID);
                 }
             }
+
+            //test values
+            //courseGraph.insertCourse("MATH", "163");
+            //courseGraph.insertCourse("PHYS", "243");
+            //courseGraph.insertCourse("CS", "132");
+            //courseGraph.insertCourse("CS", "131");
             Console.WriteLine("Graph has been built");
+
+
+
+
         }
 
-        public int getImportanceRating(string dep, string num)
+
+        public List<Course> getQualifiedCourses()
+        {
+            List<Course> qual = new List<Course>();
+            qual = courseGraph.findQualifiedCourses();
+            foreach(Course element in qual)
+            {
+                element.importance = getImportanceRating(element);
+            }
+            return qual;
+        }
+
+
+
+        public int getImportanceRating(Course passed)
         {
             int importance = 0;
             Subject temp;
-            subjectRequirements.TryGetValue(dep, out temp);
+            subjectRequirements.TryGetValue(passed.departmentID, out temp);
             Course tempC;
-            if (temp.reqCourses.TryGetValue(dep + num, out tempC))
-                importance += 10;
-            importance += courseGraph.occurenceCount(dep, num);
-            switch (dep)
+            if (temp != null)
+            {
+                if (temp.reqCourses.TryGetValue(passed.departmentID + passed.numberID, out tempC))
+                    importance += 10;
+            }
+            importance += courseGraph.occurenceCount(passed.departmentID, passed.numberID);
+            switch (passed.departmentID)
             {
                 case "MATH":
                     importance += 55;

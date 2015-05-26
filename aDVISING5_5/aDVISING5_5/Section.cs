@@ -23,6 +23,10 @@ namespace sharpAdvising
             sectionID = name;
          
         }
+        public Section(Section passed)
+        {
+            sectionID = passed.sectionID;
+        }
         public string sectionID;
 
     }

@@ -23,13 +23,14 @@ namespace sharpAdvising
         {
             m_departmentID = departmentID;
             m_numberID = numberID;
+            completed = false;
         }
 
         /// The department ID of the course
         public String m_departmentID;
         /// The number ID of the course
         public String m_numberID;
-
-       public int row;
+        public bool completed;
+        public int row;
     }
 }
