@@ -19,20 +19,18 @@ namespace sharpAdvising
 
             SQLHANDLER.start();
             PreReq pre = new PreReq();
-
+            Graph graph = new Graph();
             string x;
-            do
-            {
+            do {
                 TimeFilter time = new TimeFilter();
-               List<Match> recomended = time.buildMyScheduleFor(pre.getQualifiedCourses(), "Fall", 3);
-               pre.updateCompleted(recomended);
+                List<Match> recomended = time.buildMyScheduleFor(pre.getQualifiedCourses(), "Fall", 3);
+                pre.updateCompleted(recomended);
+                List<Course> qual = pre.getQualifiedCourses();
+
+                Console.WriteLine("Press 'q' to quit");
                 x = Console.ReadLine();
-            } while (x != "end");
-            for (int i = 0; i < 3; i++)
-            {
-
-
-            }
+            } while (x != "q");
+            
             Console.WriteLine("sdf");
 
         }
