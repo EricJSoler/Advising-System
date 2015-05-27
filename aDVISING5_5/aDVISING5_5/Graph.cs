@@ -25,6 +25,25 @@ namespace sharpAdvising
             gridDepth = 0;
         }
 
+
+        public void fixDepths()
+        {
+            for(int i = 0; i < courseGrid.Count; i++)
+            {
+                int rowsDepth = 0;
+                for(int j = 0; j < courseGrid[i].Count; j++)
+                {
+                    if (courseGrid[i][j].Count > rowsDepth)
+                        rowsDepth = courseGrid[i][j].Count;
+                }
+                for(int j = 0; j < courseGrid[i].Count; j++)
+                {
+                    while (courseGrid[i][j].Count < rowsDepth)
+                        courseGrid[i][j].Add(false);
+                }
+            }
+        }
+
         /// <summary>
         /// Inserts a Course Into the graph. This calls the functions for building the 
         /// graph since it didnt make since to have to pass the parent index from main 
@@ -41,7 +60,12 @@ namespace sharpAdvising
                 allCourses.Add(dep + num, temp);
                 int courseRow = addCourseToGrid();
                 temp.row = courseRow;
-                this.build(row, courseRow);
+                int placementnumber;
+               
+                if((coursesPlacedInto.TryGetValue(dep,out placementnumber)) && (placementnumber.ToString() == num))
+                { }
+                else
+                    this.build(row, courseRow);
             }
             catch (ArgumentException e) {
                 //Already have it do nothing brah
@@ -189,9 +213,9 @@ namespace sharpAdvising
                 // check each depth of row i (depth is constant through the row)
                 for (int j = 0; j < courseGrid[i][0].Count; j++) {
                     // check each column at depth j
-                    for (int k = 0; k < courseGrid[i][j].Count; k++) {
+                    for (int k = 0; k < courseGrid[i].Count; k++) {
                         // check if the course is a prereq for this course
-                        if (courseGrid[i][j][k] == true) {
+                        if (courseGrid[i][k][j] == true) {
                             count++;
                             break;
                         }
@@ -199,13 +223,13 @@ namespace sharpAdvising
                 }
                 if (count == 0) {
                     GraphNode element = allCourses.ElementAt(i).Value;
-                    qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                    //qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                     //foreach (GraphNode element in allCourses.Values) {
-                    //    if (element.row == i && !element.completed)
-                    //        qualified.Add(new Course(element.m_departmentID, element.m_numberID));
-                    //}
+                        if (element.row == i && !element.completed)
+                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                    }
                 }
-            }
+            
 
             return qualified;
         }
