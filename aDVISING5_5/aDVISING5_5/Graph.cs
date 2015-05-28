@@ -267,6 +267,7 @@ namespace sharpAdvising
                 }
                 if (count == 0) {
                     GraphNode element = allCourses.ElementAt(i).Value;
+                        if(!element.completed)
                             qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                     }
                 }

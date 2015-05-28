@@ -17,7 +17,7 @@ namespace sharpAdvising
 
         public PreReq()
         {
-            program = "AAS-MCAIMS";
+            program = "AAS-Pre-Engineering-MCAIMS";
             subjectRequirements = new Dictionary<string, Subject>();
             courseGraph = new Graph();
             Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
@@ -44,23 +44,36 @@ namespace sharpAdvising
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
-            cmd.CommandText = "dbo.read_subjects_by_program";
+            cmd.CommandText = "dbo.ReadRequiredCourses_FromGeneralDegree_By_ProgramID";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@programID", program));
+            cmd.Parameters.Add(new SqlParameter("@ProgramID", program));
             cmd.Connection = SQLHANDLER.myConnection2;
 
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 string readValue = reader.GetValue(0).ToString();
-                try
+                Subject temp;
+                if(!(subjectRequirements.TryGetValue(readValue,out temp)))
                 {
                     subjectRequirements.Add(readValue, new Subject(readValue));
+
+                    subjectRequirements[readValue].addCourse(reader.GetValue(0).ToString(), reader.GetValue(1).ToString());
                 }
-                catch (ArgumentException e)
+                else
                 {
-                    //Do Nothing wow science
+                    temp.addCourse(reader.GetValue(0).ToString(), reader.GetValue(1).ToString());
                 }
+                //try
+                //{
+                //    subjectRequirements.Add(readValue, new Subject(readValue));
+                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(), reader.GetValue(2).ToString());
+                //}
+                //catch (ArgumentException e)
+                //{
+                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(),reader.GetValue(2).ToString());
+                //    //Do Nothing wow science
+                //}
             }
 
             reader.Close();
