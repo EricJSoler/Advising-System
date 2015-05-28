@@ -66,7 +66,6 @@ namespace sharpAdvising
         /// <param name="num"></param>
         public void insertCourse(string dep, string num)
         {
-            //List<PrereqRow> row; = this.getCoursePrereq(dep, num);
             try {
                 List<PrereqRow> row;
                 if (frontLoaded.TryGetValue(dep + num, out row))
