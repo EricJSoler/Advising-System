@@ -30,3 +30,13 @@ C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\Entit
 C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.xml
 C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ejsoler\Desktop\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe.config
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.exe
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\aDVISING5_5.pdb
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.exe
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\aDVISING5_5.pdb
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.dll
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.xml
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Emmanuel\Google Drive\Workspace\GitHub\Advising-System\aDVISING5_5\aDVISING5_5\obj\Debug\sharpAdvising.csprojResolveAssemblyReference.cache
