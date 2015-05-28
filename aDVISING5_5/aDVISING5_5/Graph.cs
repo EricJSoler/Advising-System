@@ -22,7 +22,19 @@ namespace sharpAdvising
             allCourses = new Dictionary<String, GraphNode>();
             courseGrid = new List<List<List<bool>>>();
             coursesPlacedInto = new Dictionary<String, int>();
+            frontLoaded = new Dictionary<String, List<PrereqRow>>();
             gridDepth = 0;
+        }
+
+        public void frontLoad(string dep, string num)
+        {
+            List<PrereqRow> pres = getCoursePrereq(dep, num);
+            try
+            {
+                frontLoaded.Add(dep + num, pres);
+            }
+            catch(ArgumentException e)
+            { /*already have it do nothing*/}
         }
 
 
@@ -54,8 +66,12 @@ namespace sharpAdvising
         /// <param name="num"></param>
         public void insertCourse(string dep, string num)
         {
-            List<PrereqRow> row = this.getCoursePrereq(dep, num);
             try {
+                List<PrereqRow> row;
+                if (frontLoaded.TryGetValue(dep + num, out row))
+                { /* do nothing*/}
+                else
+                    row = this.getCoursePrereq(dep, num);
                 GraphNode temp = new GraphNode(dep, num);
                 allCourses.Add(dep + num, temp);
                 int courseRow = addCourseToGrid();
@@ -63,7 +79,7 @@ namespace sharpAdvising
                 int placementnumber;
                
                 if((coursesPlacedInto.TryGetValue(dep,out placementnumber)) && (placementnumber.ToString() == num))
-                { }
+                { /*Do nothing on purpose*/}
                 else
                     this.build(row, courseRow);
             }
@@ -155,13 +171,23 @@ namespace sharpAdvising
                     }
 
                     List<PrereqRow> morePrereqs;
-                    morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
-                    int prevCount = allCourses.Count;
+                    if (frontLoaded.TryGetValue(row.prereqDepartmentID + row.prereqNumberID, out morePrereqs))
+                    { /* do nothing*/}
+                    else
+                    {
+                        morePrereqs = this.getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
+                        try
+                        {
+                            frontLoaded.Add(row.prereqDepartmentID + row.prereqNumberID, morePrereqs);
+                        }
+                        catch(ArgumentException e)
+                        { }
+                    }
                     build(morePrereqs, index);
                     // If we removed this item continue.
                     if (allCourses.Count < prevCount)
                         continue;
-
+                    
                     if (row.type == "OR") {
                         checkDepth(parentIndex, index, path++);
                     }
@@ -234,9 +260,9 @@ namespace sharpAdvising
                 }
                 if (count == 0) {
                     GraphNode element = allCourses.ElementAt(i).Value;
-                    qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                    }
                 }
-            }
             return qualified;
         }
 
@@ -310,6 +336,8 @@ namespace sharpAdvising
         /// (Default placement in the constructor)
         /// </summary>
         public Dictionary<String, int> coursesPlacedInto;
+
+        public Dictionary<String, List<PrereqRow>> frontLoaded;
     }
 
     /// <summary>
