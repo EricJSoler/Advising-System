@@ -183,6 +183,8 @@ namespace sharpAdvising
                         catch(ArgumentException e)
                         { }
                     }
+
+                    int prevCount = allCourses.Count;
                     build(morePrereqs, index);
                     // If we removed this item continue.
                     if (allCourses.Count < prevCount)
