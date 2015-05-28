@@ -124,6 +124,7 @@ namespace sharpAdvising
                     // remove the parent.
                     if (row.prereqDepartmentID == "PLACEMENT") {
                         allCourses.Remove(row.departmentID + row.numberID);
+                        courseGrid.RemoveAt(courseGrid.Count - 1);
                         continue;
                     }
                     // If we placed above the course, skip it.
@@ -155,8 +156,12 @@ namespace sharpAdvising
 
                     List<PrereqRow> morePrereqs;
                     morePrereqs = getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
+                    int prevCount = allCourses.Count;
                     build(morePrereqs, index);
-                    
+                    // If we removed this item continue.
+                    if (allCourses.Count < prevCount)
+                        continue;
+
                     if (row.type == "OR") {
                         checkDepth(parentIndex, index, path++);
                     }
@@ -229,14 +234,9 @@ namespace sharpAdvising
                 }
                 if (count == 0) {
                     GraphNode element = allCourses.ElementAt(i).Value;
-                    //qualified.Add(new Course(element.m_departmentID, element.m_numberID));
-                    //foreach (GraphNode element in allCourses.Values) {
-                        if (element.row == i && !element.completed)
-                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
-                    }
+                    qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                 }
-            
-
+            }
             return qualified;
         }
 
