@@ -69,6 +69,14 @@ namespace sharpAdvising
             {
                 foreach (Course ele in element.reqCourses.Values)
                 {
+                    courseGraph.frontLoad(ele.departmentID, ele.numberID);
+                }
+            }
+
+            foreach (Subject element in subjectRequirements.Values)
+            {
+                foreach (Course ele in element.reqCourses.Values)
+                {
                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
                 }
             }
@@ -130,5 +138,6 @@ namespace sharpAdvising
         public static string program;
         public Dictionary<string, Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
         public Graph courseGraph;
+
     }
 }
