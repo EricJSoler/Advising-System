@@ -19,7 +19,17 @@ namespace sharpAdvising
         {
             reqCourses = new Dictionary<string, Course>();
             department = dept;
-            addCourseRequirementsForDepartment();
+           // addCourseRequirementsForDepartment();
+        }
+
+        public void addCourse(string dep, string num)
+        {
+            try
+            {
+                reqCourses.Add(dep + num, new Course(dep, num));
+            }
+            catch(ArgumentException e)
+            { }
         }
 
         public void addCourseRequirementsForDepartment()

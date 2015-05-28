@@ -17,7 +17,7 @@ namespace sharpAdvising
        
         public static void start()
         {
-            myConnection = new SqlConnection("User ID = Algo;" + "Password = Alg0rithm; server = algo.database.windows.net;" + "database =Advising_20150405;"
+            myConnection = new SqlConnection("User ID = Algo;" + "Password = Alg0rithm; server = algo.database.windows.net;" + "database =Advising_20150515;"
     + "Connection Timeout = 30;");
             try
             {

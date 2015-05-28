@@ -147,7 +147,7 @@ namespace sharpAdvising
                         (coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID))) {
                         continue;
                     }
-
+                    
                     int index = 0;
                     try {
                         GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
@@ -155,6 +155,7 @@ namespace sharpAdvising
                         int tempsRow = addCourseToGrid();
                         temp.row = tempsRow;
                         index = allCourses.Count - 1;
+                        
                     }
                     catch (ArgumentException e) {
                         for (int i = 0; i < allCourses.Count; i++) {
@@ -184,7 +185,11 @@ namespace sharpAdvising
                     }
 
                     int prevCount = allCourses.Count;
-                    build(morePrereqs, index);
+                    //If you are placed into the course you don't need to load any pre-reqs for it
+                    if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID))))
+                        build(morePrereqs, index); 
+                    
+                    
                     // If we removed this item continue.
                     if (allCourses.Count < prevCount)
                         continue;
@@ -261,6 +266,7 @@ namespace sharpAdvising
                 }
                 if (count == 0) {
                     GraphNode element = allCourses.ElementAt(i).Value;
+                        if(!element.completed)
                             qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                     }
                 }
