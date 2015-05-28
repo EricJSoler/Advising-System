@@ -123,8 +123,6 @@ namespace sharpAdvising
             return (courseGrid.Count) - 1;
         }
 
-
-
         /// <summary>
         /// Builds the graph with the given list of required courses
         /// </summary>
@@ -138,10 +136,11 @@ namespace sharpAdvising
                 if (row.prereqDepartmentID != "MASTER") {
                     // If the requirement is placement, don't add it to the graph and
                     // remove the parent.
-                    if (row.prereqDepartmentID == "PLACEMENT") {
+                    if (row.prereqDepartmentID == "PLACEMENT" && 
+                        !coursesPlacedInto.ContainsKey(row.departmentID + row.numberID)) {
                         allCourses.Remove(row.departmentID + row.numberID);
                         courseGrid.RemoveAt(courseGrid.Count - 1);
-                        continue;
+                        break;
                     }
                     // If we placed above the course, skip it.
                     if (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) &&
