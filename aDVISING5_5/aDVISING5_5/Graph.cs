@@ -10,7 +10,7 @@ namespace sharpAdvising
     /// <summary>
     /// Graph class will hold all the required courses in order to complete a degree in 
     /// a dictionary. Relationships between courses will be represented by an adjacency
-    /// matrix .
+    /// matrix.
     /// </summary>
     public class Graph
     {
@@ -119,8 +119,14 @@ namespace sharpAdvising
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows) {
-                if (row.prereqDepartmentID != "MASTER" 
-                    && row.prereqDepartmentID != "PLACEMENT") {
+                if (row.prereqDepartmentID != "MASTER") {
+                    // If the requirement is placement, don't add it to the graph and
+                    // remove the parent.
+                    if (row.prereqDepartmentID == "PLACEMENT") {
+                        allCourses.Remove(row.departmentID + row.numberID);
+                        continue;
+                    }
+                    // If we placed above the course, skip it.
                     if (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) &&
                         (coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID))) {
                         continue;
