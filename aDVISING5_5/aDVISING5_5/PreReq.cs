@@ -77,7 +77,7 @@ namespace sharpAdvising
             {
                 foreach (Course ele in element.reqCourses.Values)
                 {
-                   courseGraph.insertCourse(ele.departmentID, ele.numberID);
+                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
                 }
             }
 
