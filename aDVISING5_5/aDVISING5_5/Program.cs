@@ -38,7 +38,7 @@ namespace sharpAdvising
                 Console.WriteLine("Press 'q' to quit");
                // x = Console.ReadLine();
                 i++;
-            } while (true);
+            } while (i<10);
             
             Console.WriteLine("sdf");
 

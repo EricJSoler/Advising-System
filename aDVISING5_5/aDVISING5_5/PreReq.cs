@@ -64,16 +64,6 @@ namespace sharpAdvising
                 {
                     temp.addCourse(reader.GetValue(0).ToString(), reader.GetValue(1).ToString());
                 }
-                //try
-                //{
-                //    subjectRequirements.Add(readValue, new Subject(readValue));
-                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(), reader.GetValue(2).ToString());
-                //}
-                //catch (ArgumentException e)
-                //{
-                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(),reader.GetValue(2).ToString());
-                //    //Do Nothing wow science
-                //}
             }
 
             reader.Close();
@@ -94,21 +84,16 @@ namespace sharpAdvising
                 }
             }
 
-            courseGraph.fixDepths();
+           // courseGraph.fixDepths();
 
-            //courseGraph.insertCourse("MATH", "260");
+            //courseGraph.insertCourse("MATH", "144");
             //test values
             //courseGraph.insertCourse("MATH", "163");
             //courseGraph.insertCourse("PHYS", "243");
             //courseGraph.insertCourse("CS", "132");
             //courseGraph.insertCourse("CS", "131");
             Console.WriteLine("Graph has been built");
-
-
-
-
         }
-
 
         public List<Course> getQualifiedCourses()
         {
