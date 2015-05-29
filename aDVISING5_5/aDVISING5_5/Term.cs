@@ -8,7 +8,8 @@ namespace sharpAdvising
 {
     
     /// <summary>
-    /// Term serves to allow for information in courses to be organized more efficiently it contains a list of ownedSections
+    /// Term serves to allow for information in courses to be organized more efficiently it 
+    /// contains a list of ownedSections
     /// </summary>
 
     public class Term
@@ -29,7 +30,8 @@ namespace sharpAdvising
         /// </summary>
         public string termID;
         /// <summary>
-        /// A List<Section>ownedSections </Section> that contain information about what time block a course is offered in
+        /// A List<Section>ownedSections </Section> that contain information about what time
+        /// block a course is offered in
         /// </summary>
         public List<Section> ownedSections;
     }

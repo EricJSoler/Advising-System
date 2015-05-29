@@ -13,9 +13,13 @@ namespace sharpAdvising//We got a problem wiht naming a column external
 
     /// <summary>
     /// Course: Stores and pulls information about individual courses for the forseable future.
-    /// Usability: Create a course with the constructor accepting a string refering to the numberID of the course to pull information for and a string refering to the department ID of the course to pull information for
-    ///  It owns a list of Term objects which each term (i.e. Fall, Winter etc...) owns a list of sections that contain specific information about the courses different oferring times.
-    ///  Once this object is created you can navigate through its list of Term objects "ownedTerms" and through "ownedTerms" list of Section objects "ownedSections" to compare the times that offered between different courses.
+    /// Usability: Create a course with the constructor accepting a string refering to the numberID 
+    /// of the course to pull information for and a string refering to the department ID of the 
+    /// course to pull information for it owns a list of Term objects 
+    /// which each term (i.e. Fall, Winter etc...) owns a list of sections that contain specific
+    /// information about the courses different oferring times. Once this object is created you 
+    /// can navigate through its list of Term objects "ownedTerms" and through "ownedTerms" list
+    /// of Section objects "ownedSections" to compare the times that offered between different courses.
     /// </summary>
     public class Course 
     {

@@ -9,9 +9,12 @@ using System.IO;
 namespace sharpAdvising
 {
     /// <summary>
-    /// TODO: Update the time filter to deal with students not starting in quarter 0, If time allows should also be updated to include options to take x number of courses
-    /// The Time Filter Will receive a List<Course> qualifiedFor</Course> from the Pre-req filter this will consist of all the courses a student is currently qualified for 
-    /// The time filter will then filter which courses can be scheduled output these courses to a container then send a List<Course>couldNotBeCompleted</Course> representing courses that could not be scheduled and send that back to the Pre-Req filter
+    /// The Time Filter Will receive a List<Course> qualifiedFor</Course> from the Pre-req filter 
+    /// this will consist of all the courses a student is currently qualified for 
+    /// The time filter will then filter which courses can be scheduled, output these courses to 
+    /// a container then send a List<Match>recommended</Match> 
+    /// representing courses that were successfully scheduled and send that back to the Pre-Req filter
+    /// for the Pre-Req filter to update its graph and to output
     /// </summary>
 
 
@@ -53,13 +56,15 @@ namespace sharpAdvising
                     }
                 }
             }
-            //If there isn't anything in matches yet we know the course we can try to add the new match without comparing anything
-            if (matches.Count == 0 && addedMatch.sectionOptions.Count > 0)//Check to make sure there are some section options in the addedMatch
+            //If there isn't anything in matches yet we know the course we can try to add 
+            //the new match without comparing anything
+            //Check to make sure there are some section options in the addedMatch
+            if (matches.Count == 0 && addedMatch.sectionOptions.Count > 0)
             {
                 matches.Add(addedMatch);
                 return true;
-            }
-            if (addedMatch.sectionOptions.Count == 0)//If there aren't any sections in the addedMatch we can return false
+            }//If there aren't any sections in the addedMatch we can return false
+            if (addedMatch.sectionOptions.Count == 0)
             {
                 return false;
             }
@@ -74,9 +79,9 @@ namespace sharpAdvising
                 {
                     break;
                 }
-                for (int j = 0; j < matches[i].sectionOptions.Count;j++)// (Section sect in element.sectionOptions)//(int j = 0; j < element.sectionOptions.Count; j++)
+                for (int j = 0; j < matches[i].sectionOptions.Count;j++)
                 {
-                    for (int k = 0; k < addedMatch.sectionOptions.Count ;k++)//each (Section addedSect in addedMatch.sectionOptions)
+                    for (int k = 0; k < addedMatch.sectionOptions.Count ;k++)
                     {   //If a course only has one option give it priority
                         int sizeOfSectionForMatch = matches[i].sectionOptions.Count;
                         int sizeOfComparedCourse = addedMatch.sectionOptions.Count;
@@ -84,9 +89,9 @@ namespace sharpAdvising
                             matchHasPriority = true;
                         if (sizeOfComparedCourse == 1)
                             courseHasPriority = true;
-                        if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority && matchHasPriority)//If both compared values have priority and overlap
+                        //These Classes overlap and a decision need to be made on which one to drop
+                        if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && courseHasPriority && matchHasPriority)
                         {
-                            //These classes overlap and a decision needs to be made of which one to drop
                             if (matches[i].importance < addedMatch.importance)
                             {
                                 matches[i].sectionOptions.RemoveAt(j);
@@ -96,7 +101,7 @@ namespace sharpAdvising
                                 addedMatch.sectionOptions.RemoveAt(k);
                             }
                         }
-                        else if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && matchHasPriority)//if match has priority
+                        else if (addedMatch.sectionOptions[k].sectionID == matches[i].sectionOptions[j].sectionID && matchHasPriority)
                         {
                             addedMatch.sectionOptions.RemoveAt(k);
                         }
@@ -136,8 +141,12 @@ namespace sharpAdvising
                     return false;
         }
 
-
-        private List<Match> matches; //This will consist of a List of course objects that will contain what sections are already filled to allow for testing.
+        /// <summary>
+        /// This is a list of combinations of courses that can be taken in the given quarter
+        /// It serves as a broken down version of the Course object to allow for easy comparisons
+        /// between courses that have already been scheduled
+        /// </summary>
+        private List<Match> matches; 
     }
 
 

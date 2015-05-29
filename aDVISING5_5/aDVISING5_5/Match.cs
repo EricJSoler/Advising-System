@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace sharpAdvising
 {
     /// <summary>
-    /// Match simply holds the department id and number id for a course this will most likely be used for output
+    /// Match simply holds the department id and number id for a course this is used by the
+    /// time filter to select an appropriate schedule with no conflicts will be passed to 
+    /// "Output cleaner upper" to get cleaned up into something pretty we want to output
     /// </summary>
     public class Match
     {

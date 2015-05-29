@@ -15,7 +15,7 @@ namespace sharpAdvising
     public class Graph
     {
         /// <summary>
-        /// Constructor
+        /// Constructor                                                                          
         /// </summary>
         public Graph()
         {

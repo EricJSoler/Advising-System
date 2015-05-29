@@ -10,7 +10,9 @@ using System.IO;
 namespace sharpAdvising
 {
     /// <summary>
-    /// SQLHandler handles the connection with the database it currently has two connections one for the "Pretty Database" and one for the "Sandbox database" that we are playing in trying to make pre-req filter work
+    /// SQLHandler handles the connection with the database it currently has two connections one 
+    /// for the "Pretty Database" and one for the "Sandbox database" that we are playing in 
+    /// trying to make pre-req filter work
     /// </summary>
     public static class SQLHANDLER
     {
@@ -47,7 +49,8 @@ namespace sharpAdvising
         /// </summary>
         public static SqlConnection myConnection;
         /// <summary>
-        /// myConnection2 is the connection to the "sandbox" database that we are throwing non-finalized information into as we need it to build the rest of this processing system
+        /// myConnection2 is the connection to the "sandbox" database that we are throwing 
+        /// non-finalized information into as we need it to build the rest of this processing system
         /// </summary>
         public static SqlConnection myConnection2;
     }
