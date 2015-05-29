@@ -84,7 +84,7 @@ namespace sharpAdvising
                 }
             }
 
-           // courseGraph.fixDepths();
+           courseGraph.fixDepths();
 
             //courseGraph.insertCourse("MATH", "144");
             //test values
