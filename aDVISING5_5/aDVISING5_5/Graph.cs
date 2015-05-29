@@ -124,6 +124,17 @@ namespace sharpAdvising
         }
 
         /// <summary>
+        /// Removes the last course added to the courseGrid.
+        /// </summary>
+        private void removeCourseFromGird()
+        {
+            courseGrid.RemoveAt(courseGrid.Count - 1);
+            for (int i = 0; i < courseGrid.Count; i++) {
+                courseGrid[i].RemoveAt(courseGrid[i].Count - 1);
+            }
+        }
+
+        /// <summary>
         /// Builds the graph with the given list of required courses
         /// </summary>
         /// <param name="prereqRows">List of required courses</param>
@@ -140,7 +151,7 @@ namespace sharpAdvising
                         if ((coursesPlacedInto.ContainsKey(row.departmentID) &&
                             coursesPlacedInto[row.departmentID] != Convert.ToInt32(row.numberID))) {
                             allCourses.Remove(row.departmentID + row.numberID);
-                            courseGrid.RemoveAt(courseGrid.Count - 1);
+                            removeCourseFromGird();
                             break;
                         }
                         continue;
