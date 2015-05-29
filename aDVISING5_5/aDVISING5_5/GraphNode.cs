@@ -10,7 +10,9 @@ using System.IO;
 namespace sharpAdvising
 {
     /// <summary>
-    /// Graph Node: Will be the nodes used in the Graph class list of allCourses. Relationships between GraphNodes will be represented by the adjacency matrix adj in the Graph class
+    /// Graph Node: Will be the nodes used in the Graph class list of allCourses. 
+    /// Relationships between GraphNodes will be represented by the adjacency matrix adj in 
+    /// the Graph class
     /// </summary>
     public class GraphNode
     {

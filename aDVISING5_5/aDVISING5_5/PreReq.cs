@@ -10,7 +10,8 @@ using System.IO;
 namespace sharpAdvising
 {
     /// <summary>
-    /// This is the module currently being worked on and needs to build an object made up of courses that a student is qualified for
+    /// This is the module currently being worked on and needs to build an object made up of 
+    /// courses that a student is qualified for
     /// </summary>
     public class PreReq
     {
@@ -64,16 +65,6 @@ namespace sharpAdvising
                 {
                     temp.addCourse(reader.GetValue(0).ToString(), reader.GetValue(1).ToString());
                 }
-                //try
-                //{
-                //    subjectRequirements.Add(readValue, new Subject(readValue));
-                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(), reader.GetValue(2).ToString());
-                //}
-                //catch (ArgumentException e)
-                //{
-                //    subjectRequirements[readValue].addCourse(reader.GetValue(1).ToString(),reader.GetValue(2).ToString());
-                //    //Do Nothing wow science
-                //}
             }
 
             reader.Close();
@@ -94,21 +85,16 @@ namespace sharpAdvising
                 }
             }
 
-            courseGraph.fixDepths();
+           courseGraph.fixDepths();
 
-            //courseGraph.insertCourse("MATH", "260");
+            //courseGraph.insertCourse("MATH", "144");
             //test values
             //courseGraph.insertCourse("MATH", "163");
             //courseGraph.insertCourse("PHYS", "243");
             //courseGraph.insertCourse("CS", "132");
             //courseGraph.insertCourse("CS", "131");
             Console.WriteLine("Graph has been built");
-
-
-
-
         }
-
 
         public List<Course> getQualifiedCourses()
         {
@@ -149,7 +135,11 @@ namespace sharpAdvising
 
 
         public static string program;
-        public Dictionary<string, Subject> subjectRequirements; ///SubjectRequirements is the list of the major related subjects inside each subject is a Course list containing the  Courses required for each department
+        /// <summary>
+        /// Dictionary<string,Subject> stores the  major related subjects inside each subject is
+        /// a Course list containing the  Courses required for each department
+        /// </summary>
+        public Dictionary<string, Subject> subjectRequirements; 
         public Graph courseGraph;
 
     }

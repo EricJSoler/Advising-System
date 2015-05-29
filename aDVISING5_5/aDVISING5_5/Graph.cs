@@ -15,7 +15,7 @@ namespace sharpAdvising
     public class Graph
     {
         /// <summary>
-        /// Constructor
+        /// Constructor                                                                          
         /// </summary>
         public Graph()
         {
@@ -130,18 +130,27 @@ namespace sharpAdvising
         /// <param name="parentIndex">0 for first (for recursion)</param>
         private void build(List<PrereqRow> prereqRows, int parentIndex)
         {
+            //The whole placement thing is a pain in the ass HERE IS LAZY DELETE TO DEAL WITH IT
+            bool flag = false;
+            foreach (PrereqRow element in prereqRows)
+            {
+                if (element.prereqDepartmentID != "PLACEMENT" && element.prereqDepartmentID != "MASTER")
+                    flag = true;
+            }
+            if(!flag)
+            {
+                //HERE IS JUST A LAZY DELETE TO DEAL WITH PLACEMENTS
+                GraphNode lazyDelete;
+                if (allCourses.TryGetValue(prereqRows[0].departmentID + prereqRows[0].numberID, out lazyDelete))
+                {
+                    lazyDelete.completed = true;              
+                }
+                return;
+            }
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows) {
-                if (row.prereqDepartmentID != "MASTER") {
-                    // If the requirement is placement, don't add it to the graph and
-                    // remove the parent.
-                    if (row.prereqDepartmentID == "PLACEMENT" && 
-                        !coursesPlacedInto.ContainsKey(row.departmentID + row.numberID)) {
-                        allCourses.Remove(row.departmentID + row.numberID);
-                        courseGrid.RemoveAt(courseGrid.Count - 1);
-                        break;
-                    }
+                if (row.prereqDepartmentID != "MASTER") {                    
                     // If we placed above the course, skip it.
                     if (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) &&
                         (coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID))) {
@@ -171,6 +180,8 @@ namespace sharpAdvising
                     }
 
                     List<PrereqRow> morePrereqs;
+                    //Check to see if the pre-requisite information for this course has already been loaded
+                    //If it hasnt load it and store it for future use
                     if (frontLoaded.TryGetValue(row.prereqDepartmentID + row.prereqNumberID, out morePrereqs))
                     { /* do nothing*/}
                     else
@@ -184,15 +195,17 @@ namespace sharpAdvising
                         { }
                     }
 
-                    int prevCount = allCourses.Count;
+                    //int prevCount = allCourses.Count;
                     //If you are placed into the course you don't need to load any pre-reqs for it
-                    if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID))))
-                        build(morePrereqs, index); 
+                    if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && 
+                        (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))){
+                            build(morePrereqs, index);
+                    }
                     
                     
                     // If we removed this item continue.
-                    if (allCourses.Count < prevCount)
-                        continue;
+                    //if (allCourses.Count < prevCount)
+                    //    continue;
                     
                     if (row.type == "OR") {
                         checkDepth(parentIndex, index, path++);
@@ -250,26 +263,51 @@ namespace sharpAdvising
         public List<Course> findQualifiedCourses()
         {
             List<Course> qualified = new List<Course>();
+            List<GraphNode> alreadyAddedThisLoop = new List<GraphNode>();
             //check each row i
-            for (int i = 0; i < courseGrid.Count; i++) {
+            for (int i = 0; i < courseGrid.Count; i++)
+            {
                 int count = 0;
                 // check each depth of row i (depth is constant through the row)
-                for (int j = 0; j < courseGrid[i][0].Count; j++) {
+                for (int j = 0; j < courseGrid[i][0].Count; j++)
+                {
                     // check each column at depth j
-                    for (int k = 0; k < courseGrid[i].Count; k++) {
+                    for (int k = 0; k < courseGrid[i].Count; k++)
+                    {
                         // check if the course is a prereq for this course
-                        if (courseGrid[i][k][j] == true) {
+                        if (courseGrid[i][k][j] == true)
+                        {
                             count++;
                             break;
                         }
                     }
-                }
-                if (count == 0) {
-                    GraphNode element = allCourses.ElementAt(i).Value;
-                        if(!element.completed)
-                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                    if (count == 0)
+                    {
+                        foreach (GraphNode element in allCourses.Values)
+                        {
+                            if (element.row == i)
+                                if (!element.completed && !(alreadyAddedThisLoop.Contains(element)))
+                                {
+                                    alreadyAddedThisLoop.Add(element);
+                                    qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                                }
+                        }
                     }
                 }
+                if (count == 0)
+                {
+                    foreach (GraphNode element in allCourses.Values)
+                    {
+                        if (element.row == i)
+                            if (!element.completed && !(alreadyAddedThisLoop.Contains(element)))
+                            {
+                                alreadyAddedThisLoop.Add(element);
+                                qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                            }
+                    }
+                }
+            }
+
             return qualified;
         }
 
