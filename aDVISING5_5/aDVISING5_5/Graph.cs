@@ -15,7 +15,7 @@ namespace sharpAdvising
     public class Graph
     {
         /// <summary>
-        /// Constructor                                                                          
+        /// Constructor
         /// </summary>
         public Graph()
         {
@@ -124,39 +124,44 @@ namespace sharpAdvising
         }
 
         /// <summary>
+        /// Removes the last course added to the courseGrid.
+        /// </summary>
+        private void removeCourseFromGird()
+        {
+            courseGrid.RemoveAt(courseGrid.Count - 1);
+            for (int i = 0; i < courseGrid.Count; i++) {
+                courseGrid[i].RemoveAt(courseGrid[i].Count - 1);
+            }
+        }
+
+        /// <summary>
         /// Builds the graph with the given list of required courses
         /// </summary>
         /// <param name="prereqRows">List of required courses</param>
         /// <param name="parentIndex">0 for first (for recursion)</param>
         private void build(List<PrereqRow> prereqRows, int parentIndex)
         {
-            //The whole placement thing is a pain in the ass HERE IS LAZY DELETE TO DEAL WITH IT
-            bool flag = false;
-            foreach (PrereqRow element in prereqRows)
-            {
-                if (element.prereqDepartmentID != "PLACEMENT" && element.prereqDepartmentID != "MASTER")
-                    flag = true;
-            }
-            if(!flag)
-            {
-                //HERE IS JUST A LAZY DELETE TO DEAL WITH PLACEMENTS
-                GraphNode lazyDelete;
-                if (allCourses.TryGetValue(prereqRows[0].departmentID + prereqRows[0].numberID, out lazyDelete))
-                {
-                    lazyDelete.completed = true;              
-                }
-                return;
-            }
             int path = 0;
             String depth = "1";
             foreach (PrereqRow row in prereqRows) {
-                if (row.prereqDepartmentID != "MASTER") {                    
+                if (row.prereqDepartmentID != "MASTER") {
+                    // If the requirement is placement, don't add it to the graph and
+                    // remove the parent.
+                    if (row.prereqDepartmentID == "PLACEMENT"){
+                        if ((coursesPlacedInto.ContainsKey(row.departmentID) &&
+                            coursesPlacedInto[row.departmentID] != Convert.ToInt32(row.numberID))) {
+                            allCourses.Remove(row.departmentID + row.numberID);
+                            removeCourseFromGird();
+                            break;
+                        }
+                        continue;
+                    }
                     // If we placed above the course, skip it.
                     if (coursesPlacedInto.ContainsKey(row.prereqDepartmentID) &&
                         (coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID))) {
                         continue;
                     }
-                    
+
                     int index = 0;
                     try {
                         GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
@@ -164,7 +169,6 @@ namespace sharpAdvising
                         int tempsRow = addCourseToGrid();
                         temp.row = tempsRow;
                         index = allCourses.Count - 1;
-                        
                     }
                     catch (ArgumentException e) {
                         for (int i = 0; i < allCourses.Count; i++) {
@@ -195,17 +199,17 @@ namespace sharpAdvising
                         { }
                     }
 
-                    //int prevCount = allCourses.Count;
+                    int prevCount = allCourses.Count;
                     //If you are placed into the course you don't need to load any pre-reqs for it
                     if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && 
                         (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))){
-                            build(morePrereqs, index);
+                    build(morePrereqs, index);
                     }
                     
                     
                     // If we removed this item continue.
-                    //if (allCourses.Count < prevCount)
-                    //    continue;
+                    if (allCourses.Count < prevCount)
+                        continue;
                     
                     if (row.type == "OR") {
                         checkDepth(parentIndex, index, path++);
@@ -271,6 +275,7 @@ namespace sharpAdvising
                 // check each depth of row i (depth is constant through the row)
                 for (int j = 0; j < courseGrid[i][0].Count; j++)
                 {
+                    count = 0;
                     // check each column at depth j
                     for (int k = 0; k < courseGrid[i].Count; k++)
                     {
@@ -302,9 +307,9 @@ namespace sharpAdvising
                             if (!element.completed && !(alreadyAddedThisLoop.Contains(element)))
                             {
                                 alreadyAddedThisLoop.Add(element);
-                                qualified.Add(new Course(element.m_departmentID, element.m_numberID));
-                            }
+                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                     }
+                }
                 }
             }
 
