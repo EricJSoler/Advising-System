@@ -31,10 +31,29 @@ namespace sharpAdvising
             do {
                 TimeFilter time = new TimeFilter();
                 qual = pre.getQualifiedCourses();
+                string message = "QualifiedFor: in qtr " + i.ToString();
+                Console.WriteLine(message);
+                foreach(Course element in qual)
+                {
+
+                    Console.Write(element.departmentID);
+                    Console.Write(" ");
+                    Console.WriteLine(element.numberID);
+                }
                 List<Match> recomended = time.buildMyScheduleFor(qual, quarter[i%3], 3);
                 all.Add(recomended);
                 pre.updateCompleted(recomended);
 
+                string message1 = "Recommended: " + i.ToString();
+                Console.WriteLine(message1);
+                foreach(Match element in recomended)
+                {
+
+                    Console.Write(element.departmentID);
+                    Console.Write(" ");
+                    Console.WriteLine(element.numberID);
+                }
+                if(i==3)
                 Console.WriteLine("Press 'q' to quit");
                // x = Console.ReadLine();
                 i++;

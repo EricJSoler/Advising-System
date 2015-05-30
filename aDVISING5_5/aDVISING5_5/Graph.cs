@@ -275,6 +275,7 @@ namespace sharpAdvising
                 // check each depth of row i (depth is constant through the row)
                 for (int j = 0; j < courseGrid[i][0].Count; j++)
                 {
+                    count = 0;
                     // check each column at depth j
                     for (int k = 0; k < courseGrid[i].Count; k++)
                     {

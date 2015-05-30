@@ -50,3 +50,13 @@ Temporary Items
 *.suo
 *.suo
 *.cache
+*.transform
+*.nupkg
+*.dll
+aDVISING5_5/aDVISING5_5/packages/EntityFramework.6.1.1/lib/net40/EntityFramework.SqlServer.xml
+*.xml
+aDVISING5_5/aDVISING5_5/packages/EntityFramework.6.1.1/tools/about_EntityFramework.help.txt
+*.ps1
+*.psm1
+aDVISING5_5/aDVISING5_5/packages/EntityFramework.6.1.1/tools/EntityFramework.psd1
+*.pdb
