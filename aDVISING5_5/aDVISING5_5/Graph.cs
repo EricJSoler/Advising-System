@@ -199,7 +199,7 @@ namespace sharpAdvising
                         { }
                     }
 
-                    //int prevCount = allCourses.Count;
+                    int prevCount = allCourses.Count;
                     //If you are placed into the course you don't need to load any pre-reqs for it
                     if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && 
                         (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))){
