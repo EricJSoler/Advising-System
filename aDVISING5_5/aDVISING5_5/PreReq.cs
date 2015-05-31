@@ -22,7 +22,7 @@ namespace sharpAdvising
             subjectRequirements = new Dictionary<string, Subject>();
             courseGraph = new Graph();
             Dictionary<String, int> coursesPlacedInto = new Dictionary<String, int>();//TODO: recieve this from taylors input thing
-            coursesPlacedInto.Add("MATH", 141);
+            coursesPlacedInto.Add("MATH", 82);
             coursesPlacedInto.Add("ENGL", 98);
             coursesPlacedInto.Add("CS", 131);
             courseGraph.coursesPlacedInto = coursesPlacedInto;
@@ -69,23 +69,25 @@ namespace sharpAdvising
 
             reader.Close();
 
-            foreach (Subject element in subjectRequirements.Values)
-            {
-                foreach (Course ele in element.reqCourses.Values)
-                {
-                    courseGraph.frontLoad(ele.departmentID, ele.numberID);
-                }
-            }
+            //foreach (Subject element in subjectRequirements.Values)
+            //{
+            //    foreach (Course ele in element.reqCourses.Values)
+            //    {
+            //        courseGraph.frontLoad(ele.departmentID, ele.numberID);
+            //    }
+            //}
 
-            foreach (Subject element in subjectRequirements.Values)
-            {
-                foreach (Course ele in element.reqCourses.Values)
-                {
-                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
-                }
-            }
+            //foreach (Subject element in subjectRequirements.Values)
+            //{
+            //    foreach (Course ele in element.reqCourses.Values)
+            //    {
+            //        courseGraph.insertCourse(ele.departmentID, ele.numberID);
+            //    }
+            //}
 
-           courseGraph.fixDepths();
+            courseGraph.insertCourse("CHEM", "161");
+
+            courseGraph.fixDepths();
 
             //courseGraph.insertCourse("MATH", "144");
             //test values
