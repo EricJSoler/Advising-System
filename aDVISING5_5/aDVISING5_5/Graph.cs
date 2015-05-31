@@ -280,7 +280,12 @@ namespace sharpAdvising
 
             //////////
             ///Do the traversal right here and insert it into the row for the parent index.
-            
+            List<List<int>> paths = parent.getPaths();
+            for (int i = 0; i < paths.Count; i++) {
+                for (int j = 0; j < paths[i].Count; j++){
+                    checkDepth(parentIndex, paths[i][j], i);
+                }
+            }
             //////////
 
             List<PrereqRow> morePrereqs;
