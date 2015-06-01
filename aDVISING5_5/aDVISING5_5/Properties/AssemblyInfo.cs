@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Everett Community College")]
 [assembly: AssemblyProduct("aDVISING5_5")]
-[assembly: AssemblyCopyright("Copyright © Everett Community College 2015")]
+[assembly: AssemblyCopyright("Copyright © Everett Community College 2")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

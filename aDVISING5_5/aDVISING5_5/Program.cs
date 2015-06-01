@@ -11,7 +11,9 @@ using System.IO;
 namespace sharpAdvising
 {
 
-
+    /// <summary>
+    /// The flow of this program will be recieve a degree, quarter of enrollment and
+    /// </summary>
     public class Program
     {
         static void Main(string[] args)
@@ -31,15 +33,15 @@ namespace sharpAdvising
             do {
                 TimeFilter time = new TimeFilter();
                 qual = pre.getQualifiedCourses();
-                string message = "QualifiedFor: in qtr " + i.ToString();
-                Console.WriteLine(message);
-                foreach(Course element in qual)
-                {
+                //string message = "QualifiedFor: in qtr " + i.ToString();
+                //Console.WriteLine(message);
+                //foreach(Course element in qual)
+                //{
 
-                    Console.Write(element.departmentID);
-                    Console.Write(" ");
-                    Console.WriteLine(element.numberID);
-                }
+                //    Console.Write(element.departmentID);
+                //    Console.Write(" ");
+                //    Console.WriteLine(element.numberID);
+                //}
                 List<Match> recomended = time.buildMyScheduleFor(qual, quarter[i%3], 3);
                 all.Add(recomended);
                 pre.updateCompleted(recomended);
@@ -53,7 +55,7 @@ namespace sharpAdvising
                     Console.Write(" ");
                     Console.WriteLine(element.numberID);
                 }
-                if(i==3)
+                if(i==7)
                 Console.WriteLine("Press 'q' to quit");
                // x = Console.ReadLine();
                 i++;
