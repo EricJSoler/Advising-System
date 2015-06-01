@@ -119,11 +119,11 @@ namespace sharpAdvising
         /// <summary>
         /// Removes the last course added to the courseGrid.
         /// </summary>
-        private void removeCourseFromGird()
+        private void removeCourseFromGird(int parentIndex)
         {
-            courseGrid.RemoveAt(courseGrid.Count - 1);
+            courseGrid.RemoveAt(parentIndex);
             for (int i = 0; i < courseGrid.Count; i++) {
-                courseGrid[i].RemoveAt(courseGrid[i].Count - 1);
+                courseGrid[i].RemoveAt(parentIndex);
             }
         }
 
@@ -223,9 +223,10 @@ namespace sharpAdvising
                     if (row.prereqDepartmentID == "PLACEMENT") {
                         if ((coursesPlacedInto.ContainsKey(row.departmentID) &&
                             coursesPlacedInto[row.departmentID] != Convert.ToInt32(row.numberID))) {
-                            //allCourses.Remove(row.departmentID + row.numberID);
-                            //removeCourseFromGird();
-                            //break;
+                            GraphNode temp;
+                            allCourses.TryGetValue(row.departmentID + row.numberID, out temp);
+                            temp.completed = true;
+                            break;
                         }
 
                         continue;
@@ -348,6 +349,7 @@ namespace sharpAdvising
                             break;
                         }
                     }
+
                     if (count == 0) {
                         foreach (GraphNode element in allCourses.Values) {
                             if (element.row == i)
@@ -358,6 +360,7 @@ namespace sharpAdvising
                         }
                     }
                 }
+
                 if (count == 0) {
                     foreach (GraphNode element in allCourses.Values) {
                         if (element.row == i)
