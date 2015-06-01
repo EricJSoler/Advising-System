@@ -69,25 +69,21 @@ namespace sharpAdvising
 
             reader.Close();
 
-            //foreach (Subject element in subjectRequirements.Values)
-            //{
-            //    foreach (Course ele in element.reqCourses.Values)
-            //    {
-            //        courseGraph.frontLoad(ele.departmentID, ele.numberID);
-            //    }
-            //}
+            foreach (Subject element in subjectRequirements.Values) {
+                foreach (Course ele in element.reqCourses.Values) {
+                    courseGraph.frontLoad(ele.departmentID, ele.numberID);
+                }
+            }
 
-            //foreach (Subject element in subjectRequirements.Values)
-            //{
-            //    foreach (Course ele in element.reqCourses.Values)
-            //    {
-            //        courseGraph.insertCourse(ele.departmentID, ele.numberID);
-            //    }
-            //}
+            foreach (Subject element in subjectRequirements.Values) {
+                foreach (Course ele in element.reqCourses.Values) {
+                    courseGraph.insertCourse(ele.departmentID, ele.numberID);
+                }
+            }
 
-            courseGraph.insertCourse("MATH", "151");
-            courseGraph.insertCourse("MATH", "142");
-            courseGraph.insertCourse("CHEM", "161");
+            //courseGraph.insertCourse("MATH", "151");
+            //courseGraph.insertCourse("MATH", "142");
+            //courseGraph.insertCourse("CHEM", "161");
 
             courseGraph.fixDepths();
 

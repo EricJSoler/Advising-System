@@ -219,13 +219,15 @@ namespace sharpAdvising
             //Building the local graph
             foreach (PrereqRow row in prereqRows) {
                 if (row.prereqDepartmentID != "MASTER") {
+                    bool temporaryLazyDeleteHelper = false;
                     if (row.prereqDepartmentID == "PLACEMENT") {
                         if ((coursesPlacedInto.ContainsKey(row.departmentID) &&
                             coursesPlacedInto[row.departmentID] != Convert.ToInt32(row.numberID))) {
-                            allCourses.Remove(row.departmentID + row.numberID);
-                            removeCourseFromGird();
-                            break;
+                            //allCourses.Remove(row.departmentID + row.numberID);
+                            //removeCourseFromGird();
+                            //break;
                         }
+
                         continue;
                     }
                     // If we placed above the course, skip it.
@@ -238,6 +240,7 @@ namespace sharpAdvising
                         allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
                         int tempsRow = addCourseToGrid();
                         temp.row = tempsRow;
+                        temp.completed = temporaryLazyDeleteHelper;
                         row.gridLocation = temp.row;
                         coursesAddedThisTimeAround.Add(row);
                     }
