@@ -29,27 +29,22 @@ namespace sharpAdvising
         public void frontLoad(string dep, string num)
         {
             List<PrereqRow> pres = getCoursePrereq(dep, num);
-            try
-            {
+            try {
                 frontLoaded.Add(dep + num, pres);
             }
-            catch(ArgumentException e)
-            { /*already have it do nothing*/}
+            catch (ArgumentException e) { /*already have it do nothing*/}
         }
 
 
         public void fixDepths()
         {
-            for(int i = 0; i < courseGrid.Count; i++)
-            {
+            for (int i = 0; i < courseGrid.Count; i++) {
                 int rowsDepth = 0;
-                for(int j = 0; j < courseGrid[i].Count; j++)
-                {
+                for (int j = 0; j < courseGrid[i].Count; j++) {
                     if (courseGrid[i][j].Count > rowsDepth)
                         rowsDepth = courseGrid[i][j].Count;
                 }
-                for(int j = 0; j < courseGrid[i].Count; j++)
-                {
+                for (int j = 0; j < courseGrid[i].Count; j++) {
                     while (courseGrid[i][j].Count < rowsDepth)
                         courseGrid[i][j].Add(false);
                 }
@@ -68,8 +63,7 @@ namespace sharpAdvising
         {
             try {
                 List<PrereqRow> row;
-                if (frontLoaded.TryGetValue(dep + num, out row))
-                { /* do nothing*/}
+                if (frontLoaded.TryGetValue(dep + num, out row)) { /* do nothing*/}
                 else
                     row = this.getCoursePrereq(dep, num);
                 GraphNode temp = new GraphNode(dep, num);
@@ -77,9 +71,8 @@ namespace sharpAdvising
                 int courseRow = addCourseToGrid();
                 temp.row = courseRow;
                 int placementnumber;
-               
-                if((coursesPlacedInto.TryGetValue(dep,out placementnumber)) && (placementnumber.ToString() == num))
-                { /*Do nothing on purpose*/}
+
+                if ((coursesPlacedInto.TryGetValue(dep, out placementnumber)) && (placementnumber.ToString() == num)) { /*Do nothing on purpose*/}
                 else
                     this.build(row, courseRow);
             }
@@ -126,11 +119,74 @@ namespace sharpAdvising
         /// <summary>
         /// Removes the last course added to the courseGrid.
         /// </summary>
-        private void removeCourseFromGird()
+        private void removeCourseFromGird(int parentIndex)
         {
-            courseGrid.RemoveAt(courseGrid.Count - 1);
+            courseGrid.RemoveAt(parentIndex);
             for (int i = 0; i < courseGrid.Count; i++) {
-                courseGrid[i].RemoveAt(courseGrid[i].Count - 1);
+                courseGrid[i].RemoveAt(parentIndex);
+            }
+        }
+
+
+        private void findMyGroup(PrereqRow toBePlaced, LocalGraphNode root)
+        {
+            bool reccomended = false;
+            if (root.children.Count == 0) {
+                LocalGraphNode placement = new LocalGraphNode();
+                placement.group = toBePlaced.groupID;
+                placement.departmentID = toBePlaced.prereqDepartmentID;
+                placement.numberID = toBePlaced.prereqNumberID;
+                placement.allCourseIndex = toBePlaced.gridLocation;
+                root.children.Add(placement);
+                reccomended = true;
+                return;
+            }
+            foreach (LocalGraphNode element in root.children) {
+
+                if (toBePlaced.groupID == element.group && toBePlaced.type == "AND") {
+                    LocalGraphNode placement = new LocalGraphNode();
+                    placement.group = toBePlaced.groupID;
+                    placement.departmentID = toBePlaced.prereqDepartmentID;
+                    placement.numberID = toBePlaced.prereqNumberID;
+                    placement.allCourseIndex = toBePlaced.gridLocation;
+                    element.children.Add(placement);
+                    reccomended = true;
+                    return;
+                }
+                else if (toBePlaced.groupID == element.group && toBePlaced.type == "OR") {
+                    LocalGraphNode placement = new LocalGraphNode();
+                    placement.group = toBePlaced.groupID;
+                    placement.departmentID = toBePlaced.prereqDepartmentID;
+                    placement.numberID = toBePlaced.prereqNumberID;
+                    placement.allCourseIndex = toBePlaced.gridLocation;
+                    root.children.Add(placement);
+                    reccomended = true;
+                    return;
+                }
+                else {
+                    int similiarites = 0;
+                    for (int i = 0, k = 0; i < element.group.Count() && k < toBePlaced.groupID.Count(); i++, k++) {
+                        if (element.group[i] == toBePlaced.groupID[k])
+                            similiarites++;
+                    }
+                    if (similiarites == element.group.Count()) {
+                        findMyGroup(toBePlaced, element);
+                        reccomended = true;
+                        return;
+                    }
+                    //Check for off by one that means they are the  same level
+                }
+
+            }
+            //If none of these conditions were true it must insert here
+
+            if (!reccomended) {
+                LocalGraphNode placement2 = new LocalGraphNode();
+                placement2.group = toBePlaced.groupID;
+                placement2.departmentID = toBePlaced.prereqDepartmentID;
+                placement2.numberID = toBePlaced.prereqNumberID;
+                placement2.allCourseIndex = toBePlaced.gridLocation;
+                root.children.Add(placement2);
             }
         }
 
@@ -141,19 +197,38 @@ namespace sharpAdvising
         /// <param name="parentIndex">0 for first (for recursion)</param>
         private void build(List<PrereqRow> prereqRows, int parentIndex)
         {
-            int path = 0;
-            String depth = "1";
+            //
+            List<PrereqRow> coursesAddedThisTimeAround = new List<PrereqRow>();
+
+            //This is where the local graph will stem from
+            LocalGraphNode parent = new LocalGraphNode();
+            parent.group = "1";
+
+            //Sorting the prereqRows
+            for (int i = 0; i < prereqRows.Count; i++) {
+                int smallIndex = i;
+                for (int j = i + 1; j < prereqRows.Count; j++) {
+                    if (prereqRows[j].groupIDCount < prereqRows[i].groupIDCount) {
+                        smallIndex = j;
+                    }
+                }
+                PrereqRow temp = prereqRows[i];
+                prereqRows[i] = prereqRows[smallIndex];
+                prereqRows[smallIndex] = temp;
+            }
+            //Building the local graph
             foreach (PrereqRow row in prereqRows) {
                 if (row.prereqDepartmentID != "MASTER") {
-                    // If the requirement is placement, don't add it to the graph and
-                    // remove the parent.
-                    if (row.prereqDepartmentID == "PLACEMENT"){
+                    bool temporaryLazyDeleteHelper = false;
+                    if (row.prereqDepartmentID == "PLACEMENT") {
                         if ((coursesPlacedInto.ContainsKey(row.departmentID) &&
                             coursesPlacedInto[row.departmentID] != Convert.ToInt32(row.numberID))) {
-                            allCourses.Remove(row.departmentID + row.numberID);
-                            removeCourseFromGird();
+                            GraphNode temp;
+                            allCourses.TryGetValue(row.departmentID + row.numberID, out temp);
+                            temp.completed = true;
                             break;
                         }
+
                         continue;
                     }
                     // If we placed above the course, skip it.
@@ -161,68 +236,54 @@ namespace sharpAdvising
                         (coursesPlacedInto[row.prereqDepartmentID] > Convert.ToInt32(row.prereqNumberID))) {
                         continue;
                     }
-
-                    int index = 0;
                     try {
                         GraphNode temp = new GraphNode(row.prereqDepartmentID, row.prereqNumberID);
                         allCourses.Add(row.prereqDepartmentID + row.prereqNumberID, temp);
                         int tempsRow = addCourseToGrid();
                         temp.row = tempsRow;
-                        index = allCourses.Count - 1;
+                        temp.completed = temporaryLazyDeleteHelper;
+                        row.gridLocation = temp.row;
+                        coursesAddedThisTimeAround.Add(row);
                     }
                     catch (ArgumentException e) {
-                        for (int i = 0; i < allCourses.Count; i++) {
-                            if (allCourses.ElementAt(i).Key == row.prereqDepartmentID + row.prereqNumberID) {
-                                if (row.prereqDepartmentID == "MASTER")
-                                    parentIndex = i;
-                                else
-                                    index = i;
-
-                                break;
-                            }
+                        GraphNode found;
+                        if (allCourses.TryGetValue(row.prereqDepartmentID + row.prereqNumberID, out found)) {
+                            row.gridLocation = found.row;
                         }
                     }
+                    findMyGroup(row, parent);
 
-                    List<PrereqRow> morePrereqs;
-                    //Check to see if the pre-requisite information for this course has already been loaded
-                    //If it hasnt load it and store it for future use
-                    if (frontLoaded.TryGetValue(row.prereqDepartmentID + row.prereqNumberID, out morePrereqs))
-                    { /* do nothing*/}
-                    else
-                    {
-                        morePrereqs = this.getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
-                        try
-                        {
-                            frontLoaded.Add(row.prereqDepartmentID + row.prereqNumberID, morePrereqs);
-                        }
-                        catch(ArgumentException e)
-                        { }
-                    }
+                }
+            }
 
-                    int prevCount = allCourses.Count;
-                    //If you are placed into the course you don't need to load any pre-reqs for it
-                    if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) && 
-                        (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))){
-                    build(morePrereqs, index);
+            //////////
+            ///Do the traversal right here and insert it into the row for the parent index.
+            List<List<int>> paths = parent.getPaths();
+            for (int i = 0; i < paths.Count; i++) {
+                for (int j = 0; j < paths[i].Count; j++) {
+                    checkDepth(parentIndex, paths[i][j], i);
+                }
+            }
+            //////////
+
+            List<PrereqRow> morePrereqs;
+            foreach (PrereqRow row in coursesAddedThisTimeAround) {
+                if (frontLoaded.TryGetValue(row.prereqDepartmentID + row.prereqNumberID, out morePrereqs)) { /* do nothing*/}
+                else {
+                    morePrereqs = this.getCoursePrereq(row.prereqDepartmentID, row.prereqNumberID);
+                    try {
+                        frontLoaded.Add(row.prereqDepartmentID + row.prereqNumberID, morePrereqs);
                     }
-                    
-                    
-                    // If we removed this item continue.
-                    if (allCourses.Count < prevCount)
-                        continue;
-                    
-                    if (row.type == "OR") {
-                        checkDepth(parentIndex, index, path++);
-                    }
-                    else {
-                        if (row.groupID.Split('.').Count() < depth.Split('.').Count() ||
-                            row.groupID.Split('.')[row.groupID.Split('.').Count() - 1] != depth.Split('.')[depth.Split('.').Count() - 1])
-                            path++;
-                        checkDepth(parentIndex, index, path);
-                    }
+                    catch (ArgumentException e) { }
+                }
+                if (!(coursesPlacedInto.ContainsKey(row.prereqDepartmentID) &&
+                    (coursesPlacedInto[row.prereqDepartmentID] == Convert.ToInt32(row.prereqNumberID)))) {
+                    build(morePrereqs, row.gridLocation);
                 }
             }
         }
+
+
         /// <summary>
         /// Gets the list of courses required to take for the desired course
         /// </summary>
@@ -251,7 +312,13 @@ namespace sharpAdvising
                 prereqs[i].prereqDepartmentID = reader.GetValue(0).ToString();
                 prereqs[i].prereqNumberID = reader.GetValue(1).ToString();
                 prereqs[i].type = reader.GetValue(2).ToString();
-                prereqs[i++].groupID = reader.GetValue(3).ToString();
+                String recieved = reader.GetValue(3).ToString();
+                String[] stuff = recieved.Split('.');
+
+                for (int j = 0; j < stuff.Count(); j++)
+                    prereqs[i].groupID += stuff[j];
+                prereqs[i].groupIDCount = prereqs[i].groupID.Count();
+                i++;
             }
             reader.Close();
 
@@ -269,47 +336,39 @@ namespace sharpAdvising
             List<Course> qualified = new List<Course>();
             List<GraphNode> alreadyAddedThisLoop = new List<GraphNode>();
             //check each row i
-            for (int i = 0; i < courseGrid.Count; i++)
-            {
+            for (int i = 0; i < courseGrid.Count; i++) {
                 int count = 0;
                 // check each depth of row i (depth is constant through the row)
-                for (int j = 0; j < courseGrid[i][0].Count; j++)
-                {
+                for (int j = 0; j < courseGrid[i][0].Count; j++) {
                     count = 0;
                     // check each column at depth j
-                    for (int k = 0; k < courseGrid[i].Count; k++)
-                    {
+                    for (int k = 0; k < courseGrid[i].Count; k++) {
                         // check if the course is a prereq for this course
-                        if (courseGrid[i][k][j] == true)
-                        {
+                        if (courseGrid[i][k][j] == true) {
                             count++;
                             break;
                         }
                     }
-                    if (count == 0)
-                    {
-                        foreach (GraphNode element in allCourses.Values)
-                        {
+
+                    if (count == 0) {
+                        foreach (GraphNode element in allCourses.Values) {
                             if (element.row == i)
-                                if (!element.completed && !(alreadyAddedThisLoop.Contains(element)))
-                                {
+                                if (!element.completed && !(alreadyAddedThisLoop.Contains(element))) {
                                     alreadyAddedThisLoop.Add(element);
                                     qualified.Add(new Course(element.m_departmentID, element.m_numberID));
                                 }
                         }
                     }
                 }
-                if (count == 0)
-                {
-                    foreach (GraphNode element in allCourses.Values)
-                    {
+
+                if (count == 0) {
+                    foreach (GraphNode element in allCourses.Values) {
                         if (element.row == i)
-                            if (!element.completed && !(alreadyAddedThisLoop.Contains(element)))
-                            {
+                            if (!element.completed && !(alreadyAddedThisLoop.Contains(element))) {
                                 alreadyAddedThisLoop.Add(element);
-                            qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                                qualified.Add(new Course(element.m_departmentID, element.m_numberID));
+                            }
                     }
-                }
                 }
             }
 
@@ -395,6 +454,7 @@ namespace sharpAdvising
     /// </summary>
     public class PrereqRow
     {
+
         /// <summary>
         /// Represents the department of the MASTER course
         /// </summary>
@@ -419,5 +479,9 @@ namespace sharpAdvising
         /// The group ID its parent has ex: 1.1.3
         /// </summary>
         public String groupID;
+
+        public int groupIDCount;
+
+        public int gridLocation;
     }
 }
